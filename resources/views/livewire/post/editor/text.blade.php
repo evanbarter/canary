@@ -5,12 +5,35 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900 dark-mode:text-gray-200" id="modal-headline">
                     {{ __('New Post') }}
                 </h3>
-                <div class="mt-2">
+                <div class="mt-3">
                     <label for="visibility" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Visibility') }}
                     </label>
+                    <div x-data="{ selected: 1 }" class="grid grid-cols-3 gap-1 sm:gap-2">
+                        <label x-bind:class="{ 'bg-indigo-100 border-indigo-400': selected === 1 }" @click="selected = 1" for="visibility-1" class="w-full flex p-2 shadow-sm border-2 rounded text-sm">
+                            <div class="mr-2"><input id="visibility-1" class="form-radio text-indigo-600" type="radio" name="visibility" value="1" checked="checked" /></div>
+                            <div class="flex flex-col">
+                                <span class="font-bold">{{ __('Public') }}</span>
+                                <span class="text-xs sm:text-sm">{{ __('Anyone will be able to read this Post.') }}</span>
+                            </div>
+                        </label>
+                        <label x-bind:class="{ 'bg-indigo-100 border-indigo-400': selected === 0 }" @click="selected = 0" for="visibility-0" class="w-full flex p-2 shadow-sm border-2 rounded text-sm">
+                            <div class="mr-2"><input id="visibility-0" class="form-radio text-indigo-600" type="radio" name="visibility" value="0" /></div>
+                            <div class="flex flex-col">
+                                <span class="font-bold">{{ __('Followers') }}</span>
+                                <span class="text-xs sm:text-sm">{{ __('Only followers may read this Post.') }}</span>
+                            </div>
+                        </label>
+                        <label x-bind:class="{ 'bg-indigo-100 border-indigo-400': selected === -1 }" @click="selected = -1" for="visibility--1" class="w-full flex p-2 shadow-sm border-2 rounded text-sm">
+                            <div class="mr-2"><input id="visibility--1" class="form-radio text-indigo-600" type="radio" name="visibility" value="-1" /></div>
+                            <div class="flex flex-col">
+                                <span class="font-bold">{{ __('Private') }}</span>
+                                <span class="text-xs sm:text-sm">{{ __('This Post is only visible to you.') }}</span>
+                            </div>
+                        </label>
+                    </div>
                 </div>
-                <div class="mt-2">
+                <div class="mt-3">
                     <label for="title" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Title') }}
                     </label>
@@ -23,7 +46,7 @@
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="mt-2">
+                <div class="mt-3">
                     <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Post') }}
                     </label>
