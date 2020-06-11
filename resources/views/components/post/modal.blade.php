@@ -25,3 +25,10 @@
         @livewire('post.editor.' . $type)
     </div>
 </div>
+@push('scripts')
+<script >
+    window.livewire.on('postEditorSaved', () => {
+        Spruce.store('postModal').open = null
+    })
+</script>
+@endpush

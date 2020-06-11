@@ -59,9 +59,6 @@
                 window.livewire.emit('postEditorTextSave', {
                     text: this.$refs.text.value,
                 })
-                window.livewire.on('postEditorSaved', () => {
-                    Spruce.store('postModal').open = null
-                })
             }
         }
     }
