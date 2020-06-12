@@ -11,6 +11,13 @@ class Image extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
     public function post()
     {
         return $this->morphOne(Post::class, 'postable');

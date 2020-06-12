@@ -6,17 +6,22 @@
                     {{ __('New Image') }}
                 </h3>
                 <div class="mt-3">
-                    <x-post.visibility />
+                    <x-post.visibility type="{{ __('Image') }}" />
                 </div>
+                @if (!$images)
                 <div class="mt-3">
-                    <label for="files" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
+                    <label for="files" class="hidden block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Files') }}
                     </label>
-                    <input type="file" wire:model="images" multiple />
+                    <input x-ref="images" class="hidden" type="file" wire:model="images" multiple />
+                    <button @click="$refs.images.click()" class="block w-full p-2 text-sm text-gray-700 font-bold rounded shadow border hover:bg-gray-50 active:bg-gray-100 focus:outline-none dark-mode:active:bg-indigo-800">
+                        {{ __('Click to Select Images') }}
+                    </button>
                     @error('images')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
+                @endif
                 @if (count($images) > 1)
                 <div class="mt-3">
                     <label for="layout" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
@@ -51,31 +56,31 @@
                         </label>
                     </div>
                 </div>
-                @if ($layout === 'gallery')
-                <div class="mt-3">
-                    <label for="gallery_title" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
-                        {{ __('Gallery Title') }}
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input wire:model.lazy="gallery_title" id="gallery_title" name="gallery_title" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('gallery_title') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
-                    </div>
-                    @error('gallery_title')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                @endif
                 @endif
                 @if ($images)
-                <div class="mt-3 grid grid-cols-3 gap-2">
-                    @foreach ($images as $index => $image)
+                <div class="mt-6 grid grid-cols-3 gap-5">
+                    @foreach ($images as $image)
                     <div class="col-span-1 relative overflow-visible">
-                        <div wire:click="remove({{ $index }})" class="absolute top-0 right-0 -mr-3 -mt-3 p-1 h-8 w-8 z-10 bg-black text-white shadow rounded-full cursor-pointer hover:bg-gray-700">
+                        <div wire:click="remove({{ $loop->index }})" class="absolute top-0 right-0 -mr-2 -mt-2 p-1 h-6 w-6 z-10 bg-black text-white shadow rounded-full cursor-pointer hover:bg-gray-700">
                             <svg class="h-full w-full" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
                         </div>
-                        <img class="object-cover" src="{{ $image->temporaryUrl() }}">
+                        <img class="object-cover rounded @error('images.' . $loop->index) border-4 border-red-300 @enderror" src="{{ $image->temporaryUrl() }}">
                     </div>
                     <div class="col-span-2">
-                        {{-- TODO: Image title/description fields --}}
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
+                                {{ __('Title') }}
+                            </label>
+                            <div class="mt-1 rounded-md shadow-sm">
+                                <input wire:model.lazy="titles.{{ $loop->index }}" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('titles.' . $loop->index) border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                            </div>
+                            @error('titles.' . $loop->index)
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        @error('images.' . $loop->index)
+                            <p class="mt-2 text-sm text-red-600">{{ str_replace('images.' . $loop->index, __('Image'), $message) }}</p>
+                        @enderror
                     </div>
                     @endforeach
                 </div>
