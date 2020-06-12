@@ -3,7 +3,7 @@
         <div class="flex flex-col items-start">
             <div class="w-full mt-3 text-left sm:mt-0">
                 <h3 class="text-lg leading-6 font-medium text-gray-900 dark-mode:text-gray-200" id="modal-headline">
-                    {{ __('New Photo or Image') }}
+                    {{ __('New Image') }}
                 </h3>
                 <div class="mt-3">
                     <x-post.visibility />
