@@ -6,7 +6,7 @@
                     {{ __('New Post') }}
                 </h3>
                 <div class="mt-3">
-                    <x-post.visibility />
+                    <x-post.visibility type="{{ __('Post') }}" />
                 </div>
                 <div class="mt-3">
                     <label for="title" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
