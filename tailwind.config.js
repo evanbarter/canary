@@ -9,6 +9,9 @@ module.exports = {
             screens: {
                 'dark-mode': { raw: '(prefers-color-scheme: dark)' }
             },
+            opacity: {
+                '85': '0.85',
+            },
         },
     },
     variants: {
