@@ -20,7 +20,6 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('postable_id');
             $table->string('postable_type');
             $table->tinyInteger('visibility')->default(1);
-            $table->text('title');
         });
     }
 
