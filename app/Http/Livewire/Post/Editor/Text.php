@@ -22,14 +22,12 @@ class Text extends Component
     {
         $this->text = Arr::get($data, 'text');
 
-        $this->validate([
+        $text = TextPost::create($this->validate([
             'title' => 'required',
             'text' => 'required',
-        ]);
+        ]));
 
-        $text = TextPost::create(['text' => $this->text]);
         $post = new Post;
-        $post->title = $this->title;
         $post->user()->associate(auth()->user());
         $post->postable()->associate($text);
         $post->save();
