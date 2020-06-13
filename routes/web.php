@@ -22,9 +22,10 @@ Route::middleware('guest')->group(function () {
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 Route::get('password/reset/{token}', 'Auth\PasswordResetController')->name('password.reset');
 
+Route::view('/', 'home')->name('home');
+Route::view('post/{post}', 'home')->name('post.view');
+
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'home')->name('home');
-    Route::view('post/{post}', 'home')->name('post.view');
 
     Route::view('email/verify', 'auth.verify')->middleware('throttle:6,1')->name('verification.notice');
     Route::get('email/verify/{id}/{hash}', 'Auth\EmailVerificationController')->middleware('signed')->name('verification.verify');

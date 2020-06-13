@@ -20,7 +20,7 @@ class ListPosts extends Component
 
     public function hydrate()
     {
-        $this->posts = Post::persona()->orderBy('created_at', 'desc')->get();
+        $this->posts = Post::orderBy('created_at', 'desc')->get();
     }
 
     public function render()

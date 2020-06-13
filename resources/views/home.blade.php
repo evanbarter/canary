@@ -6,15 +6,14 @@
         <x-post.modal type="text" />
     </div>
 
-    <div class="h-full min-h-screen pb-16 bg-gray-200 dark-mode:bg-gray-700 shadow-inner">
+    <div class="h-full min-h-screen bg-gray-200 dark-mode:bg-gray-700 shadow-inner @if (auth()->user()) pb-16 @endif">
         @livewire('post.view-post')
         @livewire('post.list-posts')
     </div>
-
+    @if (auth()->user())
     <div class="fixed bottom-0 inset-x-auto flex justify-between items-center h-16 w-full px-8 bg-white dark-mode:bg-gray-900 shadow-inner">
         <div class="flex-1"></div>
         <div class="flex-none relative" x-data="{ open: false }" @keydown.window.escape="open = false" @click.away="open = false">
-
             <button @click="open = !open" class="p-2 shadow-md rounded-lg bg-indigo-600 border border-indigo-700 hover:bg-indigo-700 active:bg-indigo-800 active:border-indigo-800 focus:outline-none dark-mode:active:bg-indigo-800">
                 <svg class="h-4 w-4 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 4v16m8-8H4"></path></svg>
             </button>
@@ -51,4 +50,5 @@
             </button>
         </div>
     </div>
+    @endif
 @endsection
