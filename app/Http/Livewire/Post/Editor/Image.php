@@ -36,14 +36,18 @@ class Image extends Component
 
         if (count($this->images) === 1 || $this->layout === 'individual') {
             foreach ($this->images as $index => $image) {
-                $image_post = ImagePost::create(['title' => $this->titles[$index]]);
-                $image_post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
+                $post = ImagePost::create([ 'title' => [ $this->titles[$index] ] ]);
+                $post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
 
-                $post = new Post;
-                $post->user()->associate(auth()->user());
-                $post->postable()->associate($image_post);
-                $post->save();
+                $this->createPost($post);
             }
+        } else {
+            $post = ImagePost::create([ 'title' => $this->titles ]);
+            foreach ($this->images as $image) {
+                $post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
+            }
+
+            $this->createPost($post);
         }
 
         $this->emit('postEditorSaved');
@@ -52,5 +56,13 @@ class Image extends Component
     public function render()
     {
         return view('livewire.post.editor.image');
+    }
+
+    private function createPost($image)
+    {
+        $post = new Post;
+        $post->user()->associate(auth()->user());
+        $post->postable()->associate($image);
+        $post->save();
     }
 }

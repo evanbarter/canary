@@ -18,6 +18,15 @@ class Image extends Model implements HasMedia
      */
     protected $guarded = [];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'title' => 'array',
+    ];
+
     public function post()
     {
         return $this->morphOne(Post::class, 'postable');
