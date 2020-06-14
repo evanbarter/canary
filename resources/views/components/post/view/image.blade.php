@@ -39,19 +39,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-<script>
-    function gallery() {
-        return {
-            active: 1,
-            count: 1,
-            init(count) {
-                this.count = count
-            },
-            navigate(index) {
-                this.active = index
-            }
-        }
-    }
-</script>
-@endpush
