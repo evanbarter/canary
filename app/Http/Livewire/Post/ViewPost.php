@@ -16,6 +16,9 @@ class ViewPost extends Component
     public function open($id)
     {
         $this->post = Post::find($id);
+        if ($this->post->postable_type === 'text') {
+            $this->emit('hideList');
+        }
     }
 
     public function close()
