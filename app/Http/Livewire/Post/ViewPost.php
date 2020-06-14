@@ -8,7 +8,11 @@ use Livewire\Component;
 
 class ViewPost extends Component
 {
+    /** @var \App\Post */
     public $post;
+
+    /** @var bool */
+    public $start_visible = false;
 
     /** @var array */
     protected $listeners = ['postViewOpen' => 'open', 'postViewClose' => 'close'];
@@ -24,12 +28,14 @@ class ViewPost extends Component
     public function close()
     {
         $this->post = null;
+        $this->start_visible = false;
     }
 
     public function mount()
     {
         if (Route::currentRouteName() === 'post.view') {
             $this->post = Post::find(Route::current()->parameter('post'));
+            $this->start_visible = true;
         }
     }
 
