@@ -49,3 +49,9 @@
  * .bg-pattern-graph-paper { ... }
  * .skew-45 { ... }
  */
+#image-editor {
+    trix-toolbar .trix-button-group--block-tools,
+    trix-toolbar .trix-button-group--file-tools {
+        display: none !important;
+    }
+}

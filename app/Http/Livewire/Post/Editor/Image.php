@@ -36,13 +36,19 @@ class Image extends Component
 
         if (count($this->images) === 1 || $this->layout === 'individual') {
             foreach ($this->images as $index => $image) {
-                $post = ImagePost::create([ 'title' => [ $this->titles[$index] ] ]);
+                $post = ImagePost::create([
+                    'title' => [$this->titles[$index] ?? ''],
+                    'description' => [$this->descriptions[$index] ?? ''],
+                ]);
                 $post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
 
                 $this->createPost($post);
             }
         } else {
-            $post = ImagePost::create([ 'title' => $this->titles ]);
+            $post = ImagePost::create([
+                'title' => $this->titles,
+                'description' => $this->descriptions,
+            ]);
             foreach ($this->images as $image) {
                 $post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
             }
