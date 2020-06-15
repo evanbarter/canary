@@ -13,7 +13,7 @@
         <div class="flex">
             <h1 id="modal-headline" class="flex-1 mb-4 font-hairline italic text-xl sm:text-3xl leading-tight text-gray-900 dark-mode:text-gray-400">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
             <div class="flex items-end ml-6 mb-4 text-gray-700 dark-mode:text-gray-200">
-                <svg @click="$dispatch('post-close')" class="h-8 w-8 cursor-pointer hover:text-indigo-500 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg @click="$dispatch('post-close')" class="h-8 w-8 cursor-pointer hover:text-gray-900 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
         </div>
         <div class="h-full overflow-y-scroll dark-mode:border dark-mode:bg-gray-900 dark-mode:border-gray-800">
