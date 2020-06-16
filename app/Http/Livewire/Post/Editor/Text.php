@@ -9,6 +9,9 @@ use Livewire\Component;
 
 class Text extends Component
 {
+    /** @var int */
+    public $visibility = -1;
+
     /** @var string */
     public $title = '';
 
@@ -28,6 +31,7 @@ class Text extends Component
         ]));
 
         $post = new Post;
+        $post->visibility = $this->visibility;
         $post->user()->associate(auth()->user());
         $post->postable()->associate($text);
         $post->save();

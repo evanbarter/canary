@@ -11,6 +11,9 @@ class Image extends Component
 {
     use WithFileUploads;
 
+    /** @var int */
+    public $visibility = -1;
+
     /** @var array */
     public $images = [];
 

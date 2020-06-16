@@ -23,8 +23,8 @@ class Post extends Model
         return $this->morphTo();
     }
 
-    public function scopePersona($query)
+    public function scopePublic($query)
     {
-        return $query->whereUserId(auth()->user()->id);
+        return $query->where('visibility', 1);
     }
 }

@@ -5,9 +5,9 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900 dark-mode:text-gray-200" id="modal-headline">
                     {{ __('New Image') }}
                 </h3>
-                {{-- <div class="mt-3">
-                    <x-post.visibility type="{{ __('Image') }}" />
-                </div> --}}
+                <div class="mt-3">
+                    <x-post.visibility type="{{ __('Image') }}" visibility="{{ $visibility }}" />
+                </div>
                 @if (!$images)
                 <div class="mt-3">
                     <label for="files" class="hidden block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
