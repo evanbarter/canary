@@ -18,12 +18,37 @@ class Text extends Component
     /** @var string */
     public $text = '';
 
+    /** @var bool|\App\Post */
+    public $post = false;
+
     /** @var array */
-    protected $listeners = ['postEditorTextSave' => 'save'];
+    protected $listeners = [
+        'postEditorTextSave' => 'save',
+        'postEditorTextEdit' => 'startEditing'
+    ];
+
+    public function startEditing($id)
+    {
+        $post = Post::find($id);
+
+        $this->post = $post;
+        $this->visibility = $post->visibility;
+        $this->title = $post->postable->title;
+        $this->text = $post->postable->text;
+
+        $this->emit('postEditorTextReady');
+    }
 
     public function save($data)
     {
         $this->text = Arr::get($data, 'text');
+        $this->post ? $this->update() : $this->create();
+
+        $this->emit('postEditorSaved');
+    }
+
+    private function create()
+    {
 
         $text = TextPost::create($this->validate([
             'title' => 'required',
@@ -35,8 +60,18 @@ class Text extends Component
         $post->user()->associate(auth()->user());
         $post->postable()->associate($text);
         $post->save();
+    }
 
-        $this->emit('postEditorSaved');
+    private function update()
+    {
+        $this->post->postable->title = $this->title;
+        $this->post->postable->text = $this->text;
+        $this->post->postable->save();
+
+        $this->post->visibility = $this->visibility;
+        $this->post->save();
+
+        return redirect('post/' . $this->post->id);
     }
 
     public function render()
