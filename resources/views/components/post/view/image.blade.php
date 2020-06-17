@@ -8,7 +8,7 @@
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 transform"
     x-transition:leave-end="opacity-0 transform"
-    class="fixed z-50 inset-0 flex py-16 justify-center">
+    class="fixed z-40 inset-0 flex py-16 justify-center">
     <div @click="show = false; setTimeout(() => {  $dispatch('post-close') }, 200)" class="fixed inset-0">
         <div class="absolute inset-0 bg-black dark-mode:bg-black opacity-50"></div>
     </div>
@@ -17,11 +17,14 @@
             <div class="flex">
                 <h1 id="modal-headline" class="flex-1 mb-4 font-thin italic text-xl sm:text-3xl leading-tight text-white dark-mode:text-gray-400">
                     @foreach ($post->postable->getMedia('images') as $image)
-                    <span x-show="({{ $loop->index }} + 1) === active">{{ $post->postable->title[$loop->index] }}</span>
+                    <span x-show="({{ $loop->index }} + 1) === active">{{ $post->postable->title[$loop->index] ?? ''}}</span>
                     @endforeach
                 </h1>
                 <div class="flex items-end ml-3 mb-3 text-gray-100 dark-mode:text-gray-200">
-                    <svg @click="show = false; setTimeout(() => {  $dispatch('post-close') }, 200)" class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span @click="window.livewire.emit('postEditorImageEdit', {{ $post->id }}); $store.postModal.open = 'image'">
+                        <svg class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </span>
+                    <svg @click="show = false; setTimeout(() => { $dispatch('post-close') }, 200)" class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
             </div>
             <div class="flex shadow-lg">

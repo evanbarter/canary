@@ -34,7 +34,7 @@ class ViewPost extends Component
     public function mount()
     {
         if (Route::currentRouteName() === 'post.view') {
-            $this->post = Post::find(Route::current()->parameter('post'));
+            $this->post = Post::findOrFail(Route::current()->parameter('post'));
             $this->start_visible = true;
         }
     }

@@ -3,7 +3,7 @@
         <div class="flex flex-col items-start">
             <div class="w-full mt-3 text-left sm:mt-0">
                 <h3 class="text-lg leading-6 font-medium text-gray-900 dark-mode:text-gray-200" id="modal-headline">
-                    {{ __('New Image') }}
+                    {{ !$post ? __('New Post') : __('Edit Post') }}
                 </h3>
                 <div class="mt-3">
                     <x-post.visibility type="{{ __('Image') }}" visibility="{{ $visibility }}" />
@@ -22,7 +22,7 @@
                     @enderror
                 </div>
                 @endif
-                @if (count($images) > 1)
+                @if (count($images) > 1 && !$post)
                 <div class="mt-3">
                     <label for="layout" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Layout') }}
@@ -61,10 +61,12 @@
                 <div class="mt-6 grid grid-cols-3 gap-5">
                     @foreach ($images as $image)
                     <div class="col-span-1 relative overflow-visible">
+                        @if (!$post || ($post && count($images) > 1 && $layout === 'gallery'))
                         <div wire:click="remove({{ $loop->index }})" class="absolute top-0 right-0 -mr-2 -mt-2 p-1 h-6 w-6 z-10 bg-black text-white shadow rounded-full cursor-pointer hover:bg-gray-700">
                             <svg class="h-full w-full" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
                         </div>
-                        <img class="object-cover rounded @error('images.' . $loop->index) border-4 border-red-300 @enderror" src="{{ $image->temporaryUrl() }}">
+                        @endif
+                        <img class="object-cover rounded @error('images.' . $loop->index) border-4 border-red-300 @enderror" src="{{ !$post ? $image->temporaryUrl() : $image->getUrl() }}">
                     </div>
                     <div class="col-span-2">
                         <div>
@@ -82,8 +84,8 @@
                             <label for="description-{{ $loop->index }}" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                                 {{ __('Description') }}
                             </label>
-                            <input id="description-{{ $loop->index }}" {{-- wire:model="descriptions.{{ $loop->index }}" --}} type="hidden" name="content">
-                            <trix-editor wire:model.debounce.9999999ms="descriptions.{{ $loop->index }}" input="description-{{ $loop->index }}"></trix-editor>
+                            <input id="description-{{ $loop->index }}" type="hidden" name="content">
+                            <trix-editor wire:model.debounce="descriptions.{{ $loop->index }}" input="description-{{ $loop->index }}"></trix-editor>
                         </div>
                         @error('images.' . $loop->index)
                             <p class="mt-2 text-sm text-red-600">{{ str_replace('images.' . $loop->index, __('Image'), $message) }}</p>
@@ -98,7 +100,7 @@
     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700">
         <span wire:click="save" class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
             <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                {{ __('Post') }}
+                {{ !$post ? __('Post') : __('Edit') }}
             </button>
         </span>
         <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
