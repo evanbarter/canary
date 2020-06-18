@@ -43,6 +43,11 @@
                     @endforeach
                     <div class="absolute left-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate(active === 1 ? count : active - 1)"></div>
                     <div class="absolute right-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate(active === count ? 1 : active + 1)"></div>
+                    <div class="absolute bottom-0 inset-x-y w-full flex justify-center pb-2">
+                        @foreach ($post->postable->getMedia('images') as $image)
+                        <span @click="navigate({{ $loop->index }} + 1)" :class="{ 'bg-white': ({{ $loop->index }} + 1) === active, 'bg-gray-300': ({{ $loop->index }} + 1) !== active }" class="inline-block mx-1 h-2 w-2 rounded cursor-pointer shadow"></span>
+                        @endforeach
+                    </div>
                     @endif
                 </div>
                 <div class="flex flex-col w-1/3 p-6 shadow-inner bg-gray-100">
