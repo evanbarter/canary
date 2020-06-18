@@ -53,7 +53,9 @@
                 <div class="flex flex-col w-1/3 p-6 shadow-inner bg-gray-100">
                     <div class="flex-1">
                         @foreach ($post->postable->getMedia('images') as $image)
+                        @if (!empty($post->postable->description[$loop->index]))
                         <span class="text-sm" x-show="({{ $loop->index }} + 1) === active">{!! $post->postable->description[$loop->index] !!}</span>
+                        @endif
                         @endforeach
                     </div>
                     <div>
