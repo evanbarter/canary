@@ -39,6 +39,18 @@ class Text extends Component
         $this->emit('postEditorTextReady');
     }
 
+    public function delete()
+    {
+        if (!$this->post) {
+            abort(403);
+        }
+
+        $this->post->postable->delete();
+        $this->post->delete();
+
+        return redirect()->route('home');
+    }
+
     public function save($data)
     {
         $this->text = Arr::get($data, 'text');
@@ -71,7 +83,7 @@ class Text extends Component
         $this->post->visibility = $this->visibility;
         $this->post->save();
 
-        return redirect('post/' . $this->post->id);
+        return redirect()->route('post.view', $this->post);
     }
 
     public function render()
