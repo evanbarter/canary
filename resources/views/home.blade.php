@@ -43,11 +43,11 @@
             </div>
         </div>
         <div class="flex-1">
-            <button class="float-right p-2 rounded-lg hover:bg-gray-100 dark-mode:hover:bg-gray-800 active:bg-gray-200 dark-mode:active:bg-gray-700 focus:outline-none">
+            <a href="{{ route('settings') }}" class="float-right p-2 rounded-lg hover:bg-gray-100 dark-mode:hover:bg-gray-800 active:bg-gray-200 dark-mode:active:bg-gray-700 focus:outline-none">
                 <svg class="h-6 w-6 text-gray-900 dark-mode:text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
                 </svg>
-            </button>
+            </a>
         </div>
     </div>
     @endif
