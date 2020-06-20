@@ -15,7 +15,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        @livewireStyles
+        <livewire:styles>
         <style>
             [x-cloak] { display: none; }
         </style>
@@ -28,7 +28,7 @@
         @yield('body')
 
         <script src="{{ mix('js/app.js') }}"></script>
-        @livewireScripts
+        <livewire:scripts>
         @stack('scripts')
     </body>
 </html>
