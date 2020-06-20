@@ -35,10 +35,10 @@
                     @foreach ($post->postable->getMedia('images') as $image)
                     <img
                         x-show="({{ $loop->index }} + 1) === active"
-                        x-transition:enter="transition ease-in-out duration-200"
+                        {{-- x-transition:enter="transition ease-in-out duration-200"
                         x-transition:enter-start="opacity-0 transform"
                         x-transition:enter-end="opacity-100 transform"
-                        x-transition:leave="opacity-0"
+                        x-transition:leave="opacity-0" --}}
                         class="object-cover" src="{{ $image->getUrl() }}">
                     @endforeach
                     <div class="absolute left-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate(active === 1 ? count : active - 1)"></div>
@@ -50,7 +50,7 @@
                     </div>
                     @endif
                 </div>
-                <div class="flex flex-col w-1/3 p-6 shadow-inner bg-gray-100">
+                <div class="flex flex-col w-1/3 p-6 shadow-inner bg-gray-50">
                     <div class="flex-1">
                         @foreach ($post->postable->getMedia('images') as $image)
                         @if (!empty($post->postable->description[$loop->index]))
