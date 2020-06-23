@@ -13,9 +13,9 @@ class Post extends Model
      */
     protected $guarded = [];
 
-    public function user()
+    public function sourceable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
     public function postable()

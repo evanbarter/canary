@@ -127,7 +127,7 @@ class Image extends Component
     {
         $post = new Post;
         $post->visibility = $this->visibility;
-        $post->user()->associate(auth()->user());
+        $post->sourceable()->associate(auth()->user());
         $post->postable()->associate($image);
         $post->save();
     }
