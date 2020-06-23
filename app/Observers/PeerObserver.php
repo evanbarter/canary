@@ -2,8 +2,10 @@
 
 namespace App\Observers;
 
+use App\User;
 use App\Peer;
 use App\Jobs\PeerInitiateHandshake;
+use App\Notifications\PeerRequest;
 
 class PeerObserver
 {
@@ -17,6 +19,8 @@ class PeerObserver
     {
         if (!$peer->token) {
             PeerInitiateHandshake::dispatch($peer, auth()->user());
+        } else {
+            User::first()->notify(new PeerRequest($peer));
         }
     }
 
