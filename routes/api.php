@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
     Route::post('peers/handshake', 'Peers\HandshakeController')->name('peers.handshake');
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('peers/handshake', 'Peers\HandshakeResponseController')->name('peers.response');
-        Route::post('peers/handshake', 'Peers\HandshakeCompleteController')->name('peers.complete');
+        Route::post('peers/handshake/response', 'Peers\HandshakeResponseController')->name('peers.handshake.response');
+        Route::post('peers/handshake/complete', 'Peers\HandshakeCompleteController')->name('peers.handshake.complete');
     });
 });

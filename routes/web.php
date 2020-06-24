@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
         PeerHandshake::dispatch(
             $peer,
             auth()->user(),
-            '/api/v1/peers/response',
+            '/api/v1/peers/handshake/response',
             'peer'
         );
         return redirect()->route('settings');

@@ -16,7 +16,7 @@ class CreatePeersTable extends Migration
         Schema::create('peers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->dateTime('verified_at', 0);
+            $table->dateTime('verified_at', 0)->nullable();
             $table->string('url');
             $table->string('name')->nullable();
             $table->string('token')->nullable();

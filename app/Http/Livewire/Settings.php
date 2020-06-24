@@ -71,7 +71,7 @@ class Settings extends Component
     public function addPeer()
     {
         $this->validate([
-            'peerAddURL' => 'required|unique|url',
+            'peerAddURL' => 'required|url',
         ]);
 
         Peer::create(['url' => $this->peerAddURL]);

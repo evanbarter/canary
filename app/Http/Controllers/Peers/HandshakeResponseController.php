@@ -31,7 +31,7 @@ class HandshakeResponseController extends Controller
         PeerHandshake::dispatch(
             $peer,
             auth()->user(),
-            '/api/v1/peers/complete',
+            '/api/v1/peers/handshake/complete',
             'peer'
         );
     }
