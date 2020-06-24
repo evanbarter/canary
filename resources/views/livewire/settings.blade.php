@@ -107,7 +107,7 @@
 <script>
     function settings() {
         return {
-            visible: {{ $visible }},
+            visible: {{ $visible ? 'true' : 'false' }},
             tab: '{{ $tab }}',
             makeVisible() {
                 this.visible = true

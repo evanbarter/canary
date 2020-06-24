@@ -11,10 +11,10 @@ use Livewire\Component;
 class Settings extends Component
 {
     /** var bool */
-    public $visible = true;
+    public $visible = false;
 
     /** @var string */
-    public $tab = 'settings';
+    public $tab;
 
     /** @var string */
     public $passwordCurrent = '';
@@ -29,16 +29,17 @@ class Settings extends Component
     public $peerAddURL = '';
 
     protected $listeners = ['settingsSetProperty' => 'setProperty'];
+    protected $updatesQueryString = ['tab'];
+
+    public function mount()
+    {
+        $this->tab = request()->query('tab') ?? 'settings';
+    }
 
     public function setProperty(string $property, $value)
     {
-        switch ($property) {
-            case 'visible':
-                $this->visible = $value;
-                break;
-            case 'tab':
-                $this->tab = $value;
-                break;
+        if (in_array($property, ['visible', 'tab'])) {
+            $this->{$property} = $value;
         }
     }
 
@@ -70,7 +71,7 @@ class Settings extends Component
     public function addPeer()
     {
         $this->validate([
-            'peerAddURL' => 'required|url',
+            'peerAddURL' => 'required|unique|url',
         ]);
 
         Peer::create(['url' => $this->peerAddURL]);
@@ -82,6 +83,8 @@ class Settings extends Component
 
     public function render()
     {
-        return view('livewire.settings');
+        return view('livewire.settings', [
+            'peers' => Peer::all(),
+        ]);
     }
 }
