@@ -3,7 +3,7 @@
 
 You have received a peer request from {{ $peer->name }} ({{ $peer->url }}). You can confirm you would like to peer with {{ $peer->name }} by clicking below.
 
-@component('mail::button', ['url' => config('app.url') . '/peers/confirm/' . $peer->id])
+@component('mail::button', ['url' => route('peers.confirm', $peer)])
 Confirm
 @endcomponent
 

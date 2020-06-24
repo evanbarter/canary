@@ -36,11 +36,11 @@
             </div>
             @endif
             <div class="flex flex-col" x-show="tab === 'settings'">
-                <div class="flex flex-col sm:flex-row mx-8 pb-6 border-b-2 border-gray-100">
-                    <div class="sm:w-1/3 pb-4">
+                <div class="flex flex-col sm:flex-row mx-8">
+                    <div class="sm:w-1/4 pb-4">
                         <label for="password_current" class="block text-lg leading-tight font-medium">{{ __('Update Password') }}</label>
                     </div>
-                    <div class="sm:w-2/3">
+                    <div class="sm:w-3/4">
                         <div>
                             <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">{{ __('Your current password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700">
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700 mb-6">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                         <button wire:click.prevent="updatePassword" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             {{ __('Update Password') }}
@@ -77,11 +77,11 @@
 
             </div>
             <div class="flex flex-col" x-show="tab === 'peers'">
-                <div class="flex flex-col sm:flex-row mx-8 pb-6 border-b-2 border-gray-100">
-                    <div class="sm:w-1/3 pb-4">
-                        <label for="password_current" class="block text-lg leading-tight font-medium">{{ __('Add Peer') }}</label>
+                <div class="flex flex-col sm:flex-row mx-8">
+                    <div class="sm:w-1/4 pb-4">
+                        <label for="peerAddURL" class="block text-lg leading-tight font-medium">{{ __('Add Peer') }}</label>
                     </div>
-                    <div class="sm:w-2/3">
+                    <div class="sm:w-3/4">
                         <div>
                             <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">{{ __('Peer website URL') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
@@ -93,12 +93,74 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700">
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700 border-b border-gray-200 mb-6">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                         <button wire:click.prevent="addPeer" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             {{ __('Add Peer') }}
                         </button>
                     </span>
+                </div>
+                <div class="flex flex-col sm:flex-row mx-8 pb-6 border-b-2 border-gray-100">
+                    <div class="sm:w-1/4 pb-4">
+                        <label class="block text-lg leading-tight font-medium">{{ __('Peers') }}</label>
+                    </div>
+                    <div class="sm:w-3/4">
+                        <div class="flex flex-col">
+                            <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                                <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                                    <table class="min-w-full">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{ __('Peer') }}
+                                                </th>
+                                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{ __('Status') }}
+                                                </th>
+                                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white">
+                                            @forelse ($peers as $peer)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="flex items-center">
+                                                        <div>
+                                                            @if ($peer->name)
+                                                            <div class="text-sm leading-5 font-medium text-gray-900">{{ $peer->name }}</div>
+                                                            @endif
+                                                            <a href="{{ $peer->url }}" target="_blank" class="text-sm leading-5 text-gray-500">{{ $peer->url }}</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    @if ($peer->token)
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                        {{ __('Active') }}
+                                                    </span>
+                                                    @else
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                        {{ __('Unconfirmed') }}
+                                                    </span>
+                                                    @endif
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+                                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                </td>
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-no-wrap text-left border-b border-gray-200 text-sm leading-5 font-medium" colspan="3">
+                                                    {{ __('You have not added any peers yet.') }}
+                                                </td>
+                                            </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

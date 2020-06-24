@@ -1,5 +1,7 @@
 <?php
 
+use App\Peer;
+use App\Jobs\PeerHandshake;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::view('password/confirm', 'auth.passwords.confirm')->name('password.confirm');
 
     Route::livewire('settings', 'settings')->name('settings');
+
+    Route::get('peers/confirm/{peer}', function (Peer $peer) {
+        PeerHandshake::dispatch(
+            $peer,
+            auth()->user(),
+            '/api/v1/peers/response',
+            'peer'
+        );
+        return redirect()->route('settings');
+    })->name('peers.confirm');
 });

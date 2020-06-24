@@ -2,14 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Peer;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PeerRequest extends Notification implements ShouldQueue
+class PeerComplete extends Notification
 {
     use Queueable, SerializesModels;
 
@@ -45,7 +43,7 @@ class PeerRequest extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.peer.request', ['peer' => $this->peer]);
+        return (new MailMessage)->markdown('mail.peer.complete', ['peer' => $this->peer]);
     }
 
     /**
