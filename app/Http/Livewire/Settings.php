@@ -74,7 +74,7 @@ class Settings extends Component
             'peerAddURL' => 'required|url',
         ]);
 
-        Peer::create(['url' => $this->peerAddURL]);
+        Peer::create(['url' => rtrim($this->peerAddURL, '/')]);
 
         $this->peerAddURL = '';
 

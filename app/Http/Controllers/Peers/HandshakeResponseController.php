@@ -18,7 +18,7 @@ class HandshakeResponseController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $peer = Peer::where('url', $request->input('url'))->first();
+        $peer = Peer::where('url', $request->input('url'))->firstOrFail();
         $peer->update([
             'verified_at' => now(),
             'name' => $request->input('name'),
