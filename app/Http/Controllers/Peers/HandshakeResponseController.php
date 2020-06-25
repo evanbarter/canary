@@ -25,13 +25,14 @@ class HandshakeResponseController extends Controller
             'name' => $request->input('name'),
             'token' => $request->input('token'),
         ]);
-        $peer->tokens()->where('name', 'handshake')->delete();
 
-        User::first()->notify(new PeerComplete($peer));
+        $user = auth()->user();
+        $user->tokens()->where('abilities', sprintf('peer:%d:handshake', $peer->id))->delete();
+        $user->notify(new PeerComplete($peer));
 
         PeerHandshake::dispatch(
             $peer,
-            auth()->user(),
+            $user,
             '/api/v1/peers/handshake/complete',
             'peer'
         );
