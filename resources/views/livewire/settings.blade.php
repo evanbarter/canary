@@ -145,7 +145,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                                    @if ($peer->token && !$peer->verified)
+                                                    @if ($peer->token && !$peer->verified_at)
                                                     <a href="{{ route('peers.confirm', $peer) }}" class="text-indigo-600 hover:text-indigo-900 border-r pr-1">Confirm</a>
                                                     @endif
                                                     <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
