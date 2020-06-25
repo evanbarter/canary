@@ -47,7 +47,7 @@ class PeerHandshake implements ShouldQueue
      */
     public function handle()
     {
-        $token = $this->peer->createToken($this->token_type, [$this->token_type])->plainTextToken;
+        $token = $this->user->createToken(sprintf('peer:%d:%s', $this->peer->id, $this->token_type), [sprintf('peer:%d:%s', $this->peer->id, $this->token_type))->plainTextToken;
         $url = rtrim($this->peer->url, '/') . $this->path;
         $headers = [];
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Peers;
 
 use App\Peer;
+use App\User;
 use App\Jobs\PeerHandshake;
 use App\Notifications\PeerComplete;
 use App\Http\Controllers\Controller;
