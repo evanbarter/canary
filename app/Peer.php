@@ -15,4 +15,9 @@ class Peer extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function getAuthIdentifier()
+    {
+        return $this->{$this->getKeyName()};
+    }
 }
