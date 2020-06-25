@@ -52,7 +52,7 @@ class PeerHandshake implements ShouldQueue
         $headers = [];
 
         if ($this->peer->token) {
-            $headers['Bearer'] = $this->peer->token;
+            $headers['Authorization'] = 'Bearer ' . $this->peer->token;
         }
 
         $response = Http::withHeaders($headers)->post($url, [
