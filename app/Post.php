@@ -13,6 +13,15 @@ class Post extends Model
      */
     protected $guarded = [];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($post) {
+            $post->uuid = \Str::uuid();
+        });
+    }
+
     public function sourceable()
     {
         return $this->morphTo();

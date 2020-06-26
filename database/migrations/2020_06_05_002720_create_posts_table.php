@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->timestamps();
             $table->unsignedInteger('sourceable_id');
             $table->string('sourceable_type');
