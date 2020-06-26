@@ -12,4 +12,10 @@ class Peer extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function scopeVerified($query)
+    {
+        $query->whereNotNull('token');
+        $query->whereNotNull('verified_at');
+    }
 }

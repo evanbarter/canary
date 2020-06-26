@@ -20,5 +20,6 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('peers/handshake/response', 'Peers\HandshakeResponseController')->name('peers.handshake.response');
         Route::post('peers/handshake/complete', 'Peers\HandshakeCompleteController')->name('peers.handshake.complete');
+        Route::post('peers/syndicate', 'Peers\SyndicateController')->name('peers.syndicate');
     });
 });
