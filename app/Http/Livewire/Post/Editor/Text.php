@@ -10,7 +10,7 @@ use Livewire\Component;
 class Text extends Component
 {
     /** @var int */
-    public $visibility = -1;
+    public $visibility = 1;
 
     /** @var string */
     public $title = '';

@@ -43,6 +43,7 @@ class PeerSyndicatePost implements ShouldQueue
      */
     public function handle()
     {
+        $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate';
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->peer->token,
         ])->post($url, [

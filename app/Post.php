@@ -34,6 +34,16 @@ class Post extends Model
 
     public function scopePublic($query)
     {
-        return $query->where('visibility', 1);
+        $query->where('visibility', 1);
+    }
+
+    public function scopeSyndicatable($query)
+    {
+        $query->whereIn('visibility', [1, 0]);
+    }
+
+    public function getSyndicatableAttribute()
+    {
+        return in_array($this->visibility, [1, 0]);
     }
 }

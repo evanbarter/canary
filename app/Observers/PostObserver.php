@@ -2,31 +2,21 @@
 
 namespace App\Observers;
 
+use App\Peer;
 use App\Post;
 use App\Jobs\PeerSyndicatePost;
 
 class PostObserver
 {
     /**
-     * Handle the post "created" event.
-     *
-     * @param  \App\Post  $post
-     * @return void
-     */
-    public function created(Post $post)
-    {
-        $this->notifyPeers($post, 'created');
-    }
-
-    /**
      * Handle the post "updated" event.
      *
      * @param  \App\Post  $post
      * @return void
      */
-    public function updated(Post $post)
+    public function saved(Post $post)
     {
-        $this->notifyPeers($post, 'updated');
+        $this->notifyPeers($post, 'saved');
     }
 
     /**
@@ -44,10 +34,11 @@ class PostObserver
      *
      */
     private function notifyPeers(Post $post, string $event) {
-        // Make sure this post was created by the user.
-        if ($post->sourceable()->first()->is(auth()->user())) {
+        // Make sure this post should be syndicated and was created by a user.
+        if ($post->syndicatable
+            && $post->sourceable()->first()->is(auth()->user())) {
             foreach (Peer::verified()->get() as $peer) {
-                PeerSyndicatePost::dispath($peer, $post, $event);
+                PeerSyndicatePost::dispatch($peer, $post, $event);
             }
         }
     }
