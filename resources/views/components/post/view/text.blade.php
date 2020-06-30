@@ -13,9 +13,11 @@
         <div class="flex">
             <h1 id="modal-headline" class="flex-1 mb-4 font-hairline italic text-xl sm:text-3xl leading-tight text-gray-900 dark-mode:text-gray-400">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
             <div class="flex items-end ml-6 mb-4 text-gray-700 dark-mode:text-gray-200">
+                @can('update', $post)
                 <span @click="window.livewire.emit('postEditorTextEdit', {{ $post->id }}); $store.postModal.open = 'text'">
                     <svg class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </span>
+                @endcan
                 <svg @click="$dispatch('post-close')" class="h-8 w-8 cursor-pointer hover:text-gray-900 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
         </div>
