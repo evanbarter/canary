@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Post\Editor;
 
 use App\Post;
-use App\Text as TextPost;
 use App\Actions\CreateTextPost;
 use App\Actions\UpdateTextPost;
 use Illuminate\Support\Arr;
