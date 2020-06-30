@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b7c2d72dfa1def42565874a84ea0f66",
+    "content-hash": "89d46419710bd787bb1846b3a57fdde8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1632,6 +1632,64 @@
             ],
             "description": "A front-end framework for Laravel.",
             "time": "2020-06-08T15:12:38+00:00"
+        },
+        {
+            "name": "lorisleiva/laravel-actions",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lorisleiva/laravel-actions.git",
+                "reference": "bccbc78e995883a5a9727fd2f3756a9ddd4d529e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lorisleiva/laravel-actions/zipball/bccbc78e995883a5a9727fd2f3756a9ddd4d529e",
+                "reference": "bccbc78e995883a5a9727fd2f3756a9ddd4d529e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.7|^6.0|^7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lorisleiva\\Actions\\ActionServiceProvider"
+                    ],
+                    "aliases": {
+                        "Actions": "Lorisleiva\\Actions\\Facades\\Actions"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lorisleiva\\Actions\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Loris LEIVA",
+                    "email": "loris.leiva@gmail.com",
+                    "homepage": "https://lorisleiva.com"
+                }
+            ],
+            "description": "Laravel components that take care of one specific task",
+            "homepage": "https://github.com/lorisleiva/laravel-actions",
+            "keywords": [
+                "action",
+                "component",
+                "controller",
+                "job",
+                "laravel"
+            ],
+            "time": "2020-06-10T13:02:38+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

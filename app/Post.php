@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
@@ -18,7 +19,9 @@ class Post extends Model
         parent::boot();
 
         static::creating(function ($post) {
-            $post->uuid = \Str::uuid();
+            if (!$post->uuid) {
+                $post->uuid = \Str::uuid();
+            }
         });
     }
 
@@ -37,13 +40,39 @@ class Post extends Model
         $query->where('visibility', 1);
     }
 
+    public function scopeSyndicated($query)
+    {
+        $query->whereHasMorph(
+            'sourceable',
+            'App\Peer'
+        );
+    }
+
+    public function scopeLocal($query)
+    {
+        $query->whereHasMorph(
+            'sourceable',
+            'App\User'
+        );
+    }
+
     public function scopeSyndicatable($query)
     {
         $query->whereIn('visibility', [1, 0]);
+        $query->whereHasMorph(
+            'sourceable',
+            'App\User'
+        );
     }
 
     public function getSyndicatableAttribute()
     {
-        return in_array($this->visibility, [1, 0]);
+        return in_array($this->visibility, [1, 0])
+            && $this->sourceable()->first()->is(auth()->user());
+    }
+
+    public function getSyndicatedAttribute()
+    {
+        return !$this->sourceable()->first()->is(auth()->user());
     }
 }

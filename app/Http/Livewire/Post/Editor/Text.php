@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Post\Editor;
 
 use App\Post;
 use App\Text as TextPost;
+use App\Actions\CreateTextPost;
+use App\Actions\UpdateTextPost;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
@@ -61,27 +63,22 @@ class Text extends Component
 
     private function create()
     {
-
-        $text = TextPost::create($this->validate([
-            'title' => 'required',
-            'text' => 'required',
-        ]));
-
-        $post = new Post;
-        $post->visibility = $this->visibility;
-        $post->sourceable()->associate(auth()->user());
-        $post->postable()->associate($text);
-        $post->save();
+        CreateTextPost::dispatch([
+            'title' => $this->title,
+            'text' => $this->text,
+            'visibility' => $this->visibility,
+            'source' => auth()->user(),
+        ]);
     }
 
     private function update()
     {
-        $this->post->postable->title = $this->title;
-        $this->post->postable->text = $this->text;
-        $this->post->postable->save();
-
-        $this->post->visibility = $this->visibility;
-        $this->post->save();
+        UpdateTextPost::dispatch([
+            'post' => $this->post,
+            'title' => $this->title,
+            'text' => $this->text,
+            'visibility' => $this->visibility,
+        ]);
 
         return redirect()->route('post.view', $this->post);
     }

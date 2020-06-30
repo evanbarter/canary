@@ -20,12 +20,12 @@ class PostObserver
     }
 
     /**
-     * Handle the post "deleted" event.
+     * Handle the post "deleting" event.
      *
      * @param  \App\Post  $post
      * @return void
      */
-    public function deleted(Post $post)
+    public function deleting(Post $post)
     {
         $this->notifyPeers($post, 'deleted');
     }
@@ -33,10 +33,10 @@ class PostObserver
     /**
      *
      */
-    private function notifyPeers(Post $post, string $event) {
+    private function notifyPeers(Post $post, string $event)
+    {
         // Make sure this post should be syndicated and was created by a user.
-        if ($post->syndicatable
-            && $post->sourceable()->first()->is(auth()->user())) {
+        if ($post->syndicatable) {
             foreach (Peer::verified()->get() as $peer) {
                 PeerSyndicatePost::dispatch($peer, $post, $event);
             }
