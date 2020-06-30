@@ -55,3 +55,11 @@
         display: none !important;
     }
 }
+
+.bg-gradient-brand {
+    background-image: linear-gradient(135deg, #FC8181, #FC8181 30%, #F6AD55);
+}
+
+.bg-gradient-brand:hover {
+    background-image: linear-gradient(135deg, #F56565, #F56565 30%, #ED8936);
+}
