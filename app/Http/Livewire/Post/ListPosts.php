@@ -14,25 +14,34 @@ class ListPosts extends Component
     /** @var bool */
     public $show = true;
 
+    /** @var bool */
+    public $feed = false;
+
     /** @var array */
     protected $listeners = ['postEditorSaved' => '$refresh'];
 
     public function mount()
     {
-        $this->hydrate();
-        if (Route::currentRouteName() === 'post.view') {
+        if (Route::currentRouteName() === 'feed') {
+            $this->feed = true;
+        } else if (Route::currentRouteName() === 'post.view') {
             $post = Post::find(Route::current()->parameter('post'));
             if ($post->postable_type === 'text') {
                 $this->show = false;
             }
         }
+        $this->hydrate();
     }
 
     public function hydrate()
     {
-        $this->posts = auth()->user()
-            ? Post::orderBy('created_at', 'desc')->get()
-            : Post::public()->orderBy('created_at', 'desc')->get();
+        if ($this->feed) {
+            $this->posts = Post::syndicated()->orderBy('created_at', 'desc')->get();
+        } else {
+            $this->posts = auth()->user()
+                ? Post::local()->orderBy('created_at', 'desc')->get()
+                : Post::local()->public()->orderBy('created_at', 'desc')->get();
+        }
     }
 
     public function render()

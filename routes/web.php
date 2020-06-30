@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', 'Auth\LogoutController')->name('logout');
     Route::view('password/confirm', 'auth.passwords.confirm')->name('password.confirm');
 
+    Route::view('feed', 'home')->name('feed');
     Route::livewire('settings', 'settings')->name('settings');
 
     Route::get('peers/confirm/{peer}', function (Peer $peer) {

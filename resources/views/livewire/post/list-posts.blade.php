@@ -7,7 +7,7 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 transform scale-100"
         x-transition:leave-end="opacity-0 transform scale-90"
-        class="grid max-w-7xl p-8 grid-cols-1 sm:grid-cols-3 gap-8 z-0">
+        class="grid w-4/5 p-8 grid-cols-1 sm:grid-cols-3 gap-8 z-0">
         @foreach($posts as $post)
         @include('components.post.list.' . $post->postable_type, ['post' => $post])
         @endforeach

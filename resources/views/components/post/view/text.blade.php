@@ -8,8 +8,8 @@
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 transform scale-100"
     x-transition:leave-end="opacity-0 transform scale-90"
-    class="fixed inset-0 py-16 flex justify-center">
-    <div class="flex flex-col sm:max-w-4xl">
+    class="fixed inset-0 py-12 pb-16 flex justify-center">
+    <div class="flex flex-col w-4/5 sm:max-w-4xl">
         <div class="flex">
             <h1 id="modal-headline" class="flex-1 mb-4 font-hairline italic text-xl sm:text-3xl leading-tight text-gray-900 dark-mode:text-gray-400">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
             <div class="flex items-end ml-6 mb-4 text-gray-700 dark-mode:text-gray-200">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="h-full overflow-y-scroll dark-mode:border dark-mode:bg-gray-900 dark-mode:border-gray-800">
-            <div class="text-sm sm:text-base dark-mode:text-gray-200">
+            <div class="text-sm pb-8 sm:text-base dark-mode:text-gray-200">
                 <p class="my-2 text-xs" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
                 {!! $post->postable->text !!}
             </div>
