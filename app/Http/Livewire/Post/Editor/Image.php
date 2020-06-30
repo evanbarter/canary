@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Post\Editor;
 
 use App\Post;
-use App\Image as ImagePost;
+use App\Actions\CreateImagePost;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -100,35 +100,17 @@ class Image extends Component
 
     private function create()
     {
-        if (count($this->images) === 1 || $this->layout === 'individual') {
-            foreach ($this->images as $index => $image) {
-                $post = ImagePost::create([
-                    'title' => [$this->titles[$index] ?? ''],
-                    'description' => [$this->descriptions[$index] ?? ''],
-                ]);
-                $post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
+        $images = collect($this->images)->map(function ($image) {
+            return $image->temporaryUrl();
+        });
 
-                $this->createPost($post);
-            }
-        } else {
-            $post = ImagePost::create([
-                'title' => $this->titles,
-                'description' => $this->descriptions,
-            ]);
-            foreach ($this->images as $image) {
-                $post->addMediaFromUrl($image->temporaryUrl())->toMediaCollection('images');
-            }
-
-            $this->createPost($post);
-        }
-    }
-
-    private function createPost($image)
-    {
-        $post = new Post;
-        $post->visibility = $this->visibility;
-        $post->sourceable()->associate(auth()->user());
-        $post->postable()->associate($image);
-        $post->save();
+        CreateImagePost::dispatch([
+            'titles' => $this->titles,
+            'descriptions' => $this->descriptions,
+            'visibility' => $this->visibility,
+            'layout' => $this->layout,
+            'source' => auth()->user(),
+            'images' => $images,
+        ]);
     }
 }
