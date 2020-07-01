@@ -2,6 +2,7 @@
 
 use App\Peer;
 use App\Jobs\PeerHandshake;
+use App\Http\Middleware\MediaAuthentication;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordResetController')->name('pass
 
 Route::view('/', 'home')->name('home');
 Route::view('post/{post}', 'home')->name('post.view');
+Route::get('media/{media}', 'MediaController')->name('media.view')->middleware(MediaAuthentication::class);
 
 Route::middleware('auth')->group(function () {
     Route::view('email/verify', 'auth.verify')->middleware('throttle:6,1')->name('verification.notice');
