@@ -69,7 +69,7 @@
                 </div>
                 <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700 mb-6">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                        <button wire:click.prevent="updatePassword" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        <button wire:click.prevent="updatePassword" type="button" class="inline-flex justify-center w-full rounded-md border border-red-400 px-4 py-2 bg-gradient-brand text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             {{ __('Update Password') }}
                         </button>
                     </span>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700 border-b border-gray-200 mb-6">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                        <button wire:click.prevent="addPeer" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        <button wire:click.prevent="addPeer" type="button" class="inline-flex justify-center w-full rounded-md border border-red-400 px-4 py-2 bg-gradient-brand text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             {{ __('Add Peer') }}
                         </button>
                     </span>
