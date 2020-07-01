@@ -44,10 +44,22 @@ class PeerSyndicatePost implements ShouldQueue
     public function handle()
     {
         $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate';
+
+        $transformer = '\App\Transformers\\' . ucfirst($this->post->postable_type) . 'PostTransformer';
+        if (class_exists($transformer)) {
+            $post = fractal()
+               ->item($this->post)
+               ->transformWith(new $transformer())
+               ->serializeWith(new \Spatie\Fractalistic\ArraySerializer())
+               ->toJson();
+        } else {
+            $post = $this->post->toJson();
+        }
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->peer->token,
         ])->post($url, [
-            'post' => $this->post->toJson(),
+            'post' => $post,
             'event' => $this->event,
         ]);
     }
