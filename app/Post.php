@@ -73,6 +73,6 @@ class Post extends Model
 
     public function getSyndicatedAttribute()
     {
-        return !$this->sourceable()->first()->is(auth()->user());
+        return $this->sourceable_type === 'peer';
     }
 }
