@@ -19,7 +19,7 @@
         return {
             show: {{ $show ? 'true' : 'false' }},
             view(post) {
-                window.history.pushState({}, '', '/post/' + post)
+                window.history.pushState({}, '', window.location.pathname + '/post/' + post)
                 window.livewire.emit('postViewOpen', post)
             },
             init() {

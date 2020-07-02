@@ -10,7 +10,7 @@
     x-transition:leave-end="opacity-0 transform"
     class="fixed z-40 inset-0 flex py-16 justify-center">
     <div @click="show = false; setTimeout(() => {  $dispatch('post-close') }, 200)" class="fixed inset-0">
-        <div class="absolute inset-0 bg-black dark-mode:bg-black opacity-50"></div>
+        <div class="absolute inset-0 bg-black dark-mode:bg-black opacity-75"></div>
     </div>
     <div class="flex flex-col w-full sm:max-w-7xl z-50">
         <div x-data="gallery()" x-init="init({{ $post->postable->getMedia('images')->count() }})">
@@ -60,8 +60,13 @@
                         @endif
                         @endforeach
                     </div>
-                    <div>
-                        <p class="text-right text-xs" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
+                    <div class="flex flex-row-reverse">
+                        <p class="flex-1 text-right text-xs mt-2" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
+                        @if ($post->syndicated)
+                            <span class="text-xs text-white shadow-md rounded-full py-1 px-3 bg-gradient-brand border border-red-400">
+                                <a href="{{ $post->sourceable->url }}" target="_blank">{{ $post->sourceable->name }}</a>
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::view('password/confirm', 'auth.passwords.confirm')->name('password.confirm');
 
     Route::view('feed', 'home')->name('feed');
+    Route::view('feed/post/{post}', 'home')->name('feed.post.view');
     Route::livewire('settings', 'settings')->name('settings');
 
     Route::get('peers/confirm/{peer}', function (Peer $peer) {
