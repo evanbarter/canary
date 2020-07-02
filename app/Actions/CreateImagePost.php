@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Post;
 use App\Image;
+use Illuminate\Support\Facades\Http;
 use Lorisleiva\Actions\Action;
 use Carbon\Carbon;
 
@@ -42,8 +43,8 @@ class CreateImagePost extends Action
                     'title' => [$this->titles[$index] ?? ''],
                     'description' => [$this->descriptions[$index] ?? ''],
                 ]);
-                $post->addMediaFromUrl($image)->toMediaCollection('images');
 
+                $this->fileAdder($post, $image);
                 $this->createPost($post);
             }
         } else {
@@ -51,10 +52,10 @@ class CreateImagePost extends Action
                 'title' => $this->titles ?? [],
                 'description' => $this->descriptions ?? [],
             ]);
-            foreach ($this->images as $image) {
-                $post->addMediaFromUrl($image)->toMediaCollection('images');
-            }
 
+            foreach ($this->images as $image) {
+                $this->fileAdder($post, $image);
+            }
             $this->createPost($post);
         }
     }
@@ -69,9 +70,28 @@ class CreateImagePost extends Action
             $post->updated_at = new Carbon($this->updated_at);
         }
 
+        $post->uuid = $this->uuid ?? null;
         $post->visibility = $this->visibility ?? 1;
         $post->sourceable()->associate($this->source ?? auth()->user());
         $post->postable()->associate($image);
         $post->save();
+    }
+
+    private function fileAdder(Image $post, string $url)
+    {
+        if (!$this->source || $this->source->is(auth()->user())) {
+            $post->addMediaFromUrl($url)->toMediaCollection('images');
+        } else {
+            // Peer post, make an authenticated request in case it's not a
+            // public image.
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->source->token,
+            ])->get($url);
+
+            $temporary_file = tempnam(sys_get_temp_dir(), 'peer_');
+            file_put_contents($temporary_file, $response->body());
+
+            $post->addMedia($temporary_file)->toMediaCollection('images');
+        }
     }
 }

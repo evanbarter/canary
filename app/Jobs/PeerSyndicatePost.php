@@ -46,7 +46,7 @@ class PeerSyndicatePost implements ShouldQueue
         $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate';
 
         $transformer = '\App\Transformers\\' . ucfirst($this->post->postable_type) . 'PostTransformer';
-        if (class_exists($transformer)) {
+        if ($this->event !== 'deleted' && class_exists($transformer)) {
             $post = fractal()
                ->item($this->post)
                ->transformWith(new $transformer())

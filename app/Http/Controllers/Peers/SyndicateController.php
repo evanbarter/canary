@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PeerRequest;
 use App\Actions\CreateTextPost;
 use App\Actions\UpdateTextPost;
+use App\Actions\CreateImagePost;
 
 class SyndicateController extends Controller
 {
@@ -47,6 +48,21 @@ class SyndicateController extends Controller
                                 'title' => $post_data->postable->title,
                                 'text' => $post_data->postable->text,
                             ]);
+                        }
+                        break;
+                    case 'image':
+                        if (!$post) {
+                            CreateImagePost::dispatch([
+                                'source' => $peer,
+                                'uuid' => $post_data->uuid,
+                                'created_at' => $post_data->created_at,
+                                'updated_at' => $post_data->updated_at,
+                                'titles' => $post_data->postable->title,
+                                'descriptions' => $post_data->postable->description,
+                                'images' => $post_data->images,
+                            ]);
+                        } else {
+
                         }
                         break;
                 }
