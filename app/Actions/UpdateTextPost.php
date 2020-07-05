@@ -42,8 +42,8 @@ class UpdateTextPost extends Action
         $this->post->postable->save();
 
         if ($this->updated_at) {
-            $post->timestamps = false;
-            $post->updated_at = new Carbon($this->updated_at);
+            $this->post->timestamps = false;
+            $this->post->updated_at = new Carbon($this->updated_at);
         }
 
         $this->post->visibility = $this->visibility ?? 1;
