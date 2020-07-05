@@ -16,7 +16,7 @@ class ImagePostTransformer extends TransformerAbstract
     {
         $post->load('postable.media');
         $media = $post->postable->media->map(function ($image) {
-            return $image->getUrl();
+            return route('media.view.api', $image);
         });
         $post->images = $media;
         unset($post->postable->media);
