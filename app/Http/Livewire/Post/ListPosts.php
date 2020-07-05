@@ -24,7 +24,7 @@ class ListPosts extends Component
     {
         if (Route::currentRouteName() === 'feed') {
             $this->feed = true;
-        } else if (Route::currentRouteName() === 'post.view') {
+        } else if (Route::currentRouteName() === 'post.view' || Route::currentRouteName() === 'feed.post.view') {
             $post = Post::find(Route::current()->parameter('post'));
             if ($post->postable_type === 'text') {
                 $this->show = false;

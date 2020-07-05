@@ -3,4 +3,7 @@
     @if ($post->postable->getMedia('images')->count() > 1)
     <div class="absolute right-0 top-0 mr-2 mt-2 h-4 w-4 bg-gray-500 rounded-sm shadow text-xs text-center text-gray-300">{{ $post->postable->getMedia('images')->count() }}</div>
     @endif
+    @if ($post->syndicated)
+    <span class="absolute left-0 bottom-0 ml-4 mb-4 text-xs text-white shadow-md rounded-full py-1 px-3 bg-gradient-brand border border-red-400">{{ $post->sourceable->name }}</span>
+    @endif
 </div>

@@ -18,12 +18,17 @@
                     <svg class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </span>
                 @endcan
-                <svg @click="$dispatch('post-close')" class="h-8 w-8 cursor-pointer hover:text-gray-900 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg @click="show = false; setTimeout(() => { $dispatch('post-close') }, 200)" class="h-8 w-8 cursor-pointer hover:text-gray-900 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
         </div>
         <div class="h-full overflow-y-scroll dark-mode:border dark-mode:bg-gray-900 dark-mode:border-gray-800">
             <div class="text-sm pb-8 sm:text-base dark-mode:text-gray-200">
-                <p class="my-2 text-xs" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
+                <div class="flex mb-6">
+                    <span class="text-xs text-white shadow-md rounded-full py-1 px-3 bg-gradient-brand border border-red-400 mr-3">
+                        <a href="{{ $post->sourceable->url }}" target="_blank">{{ $post->sourceable->name }}</a>
+                    </span>
+                    <p class="text-xs pt-1" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
+                </div>
                 {!! $post->postable->text !!}
             </div>
         </div>
