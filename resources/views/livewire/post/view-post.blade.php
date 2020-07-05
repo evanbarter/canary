@@ -8,7 +8,8 @@
     function postView() {
         return {
             close() {
-                window.history.pushState({}, '', '/' + window.location.pathname.split('/')[1])
+                const path = window.location.pathname.split('/')[1] !== 'post' ? window.location.pathname.split('/')[1] : ''
+                window.history.pushState({}, '', '/' + path)
                 window.livewire.emit('postViewClose')
             }
         }

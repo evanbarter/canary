@@ -19,7 +19,8 @@
         return {
             show: {{ $show ? 'true' : 'false' }},
             view(post) {
-                window.history.pushState({}, '', window.location.pathname + '/post/' + post)
+                const path = window.location.pathname !== '/' ? window.location.pathname : ''
+                window.history.pushState({}, '', path + '/post/' + post)
                 window.livewire.emit('postViewOpen', post)
             },
             init() {
