@@ -50,7 +50,7 @@
         @if ($post)
         <hr class="my-5 sm:hidden">
         <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-            <button wire:click.prevent="delete" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-red-600 hover:bg-red-700 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5 dark-mode:bg-gray-500 dark-mode:text-white dark-mode:border-gray-800 dark-mode:hover:bg-gray-400 dark-mode:hover:text-gray-100">
+            <button wire:click.prevent="delete" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-red-400 hover:bg-red-500 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-red-300 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5 dark-mode:bg-gray-500 dark-mode:text-white dark-mode:border-gray-800 dark-mode:hover:bg-gray-400 dark-mode:hover:text-gray-100">
                 {{ __('Delete') }}
             </button>
         </span>
