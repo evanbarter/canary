@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Post\Editor;
 
 use App\Post;
 use App\Actions\CreateImagePost;
+use App\Actions\UpdateImagePost;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -88,12 +89,13 @@ class Image extends Component
 
     private function update()
     {
-        $this->post->postable->title = $this->titles;
-        $this->post->postable->description = $this->descriptions;
-        $this->post->postable->clearMediaCollectionExcept('images', $this->images);
-        $this->post->postable->save();
-        $this->post->visibility = $this->visibility;
-        $this->post->save();
+        UpdateImagePost::dispatch([
+            'post' => $this->post,
+            'titles' => $this->titles,
+            'descriptions' => $this->descriptions,
+            'visibility' => $this->visibility,
+            'images' => $this->images,
+        ]);
 
         return redirect()->route('post.view', $this->post);
     }

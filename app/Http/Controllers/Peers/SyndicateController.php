@@ -9,6 +9,7 @@ use App\Http\Requests\PeerRequest;
 use App\Actions\CreateTextPost;
 use App\Actions\UpdateTextPost;
 use App\Actions\CreateImagePost;
+use App\Actions\UpdateImagePost;
 
 class SyndicateController extends Controller
 {
@@ -62,7 +63,14 @@ class SyndicateController extends Controller
                                 'images' => $post_data->images,
                             ]);
                         } else {
-
+                            UpdateImagePost::dispatch([
+                                'post' => $post,
+                                'source' => $peer,
+                                'updated_at' => $post_data->updated_at,
+                                'titles' => $post_data->postable->title,
+                                'descriptions' => $post_data->postable->description,
+                                'images' => $post_data->images,
+                            ]);
                         }
                         break;
                 }
