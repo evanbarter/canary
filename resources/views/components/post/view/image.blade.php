@@ -23,10 +23,10 @@
                 <div class="flex items-end ml-3 mb-3 text-gray-100 dark-mode:text-gray-200">
                     @can('update', $post)
                     <span @click="window.livewire.emit('postEditorImageEdit', {{ $post->id }}); $store.postModal.open = 'image'">
-                        <svg class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        <svg class="h-8 w-8 cursor-pointer hover:text-red-400 transition-colors duration-150 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </span>
                     @endcan
-                    <svg @click="show = false; setTimeout(() => { $dispatch('post-close') }, 200)" class="h-8 w-8 cursor-pointer hover:text-gray-800 transition-colors duration-200" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <svg @click="show = false; setTimeout(() => { $dispatch('post-close') }, 200)" class="h-8 w-8 cursor-pointer hover:text-red-400 transition-colors duration-150" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
             </div>
             <div class="flex shadow-lg">

@@ -13,8 +13,8 @@
     @if (auth()->user())
     <div class="fixed bottom-0 inset-x-auto flex justify-between items-center h-16 w-full px-8 bg-white dark-mode:bg-gray-900 shadow-inner">
         <div class="flex-1">
-            <a class="border-b-2 uppercase text-sm font-medium mr-6 @if(Route::currentRouteName() === 'home') border-gray-700 text-gray-700 @else border-gray-400 text-gray-400 hover:text-gray-500 @endif" href="{{ route('home') }}">{{ __('You') }}</a>
-            <a class="border-b-2 border-gray-400 text-gray-400 uppercase text-sm font-medium mr-3 @if(Route::currentRouteName() === 'feed') border-gray-700 text-gray-700 @else border-gray-400 text-gray-400 hover:text-gray-500 @endif" href="{{ route('feed') }}">{{ __('Feed') }}</a>
+            <a class="border-b-2 uppercase text-sm font-medium mr-6 @if(Route::currentRouteName() === 'home' || request()->is('post/*')) border-gray-700 text-gray-700 @else border-gray-400 text-gray-400 hover:text-gray-500 @endif" href="{{ route('home') }}">{{ __('You') }}</a>
+            <a class="border-b-2 border-gray-400 text-gray-400 uppercase text-sm font-medium mr-3 @if(request()->is('feed*')) border-gray-700 text-gray-700 @else border-gray-400 text-gray-400 hover:text-gray-500 @endif" href="{{ route('feed') }}">{{ __('Feed') }}</a>
         </div>
         <div class="flex-none relative" x-data="{ open: false }" @keydown.window.escape="open = false" @click.away="open = false">
             <button @click="open = !open" class="p-2 shadow-md rounded-lg bg-gradient-brand border border-red-400 active:bg-indigo-800 active:border-indigo-800 focus:outline-none dark-mode:active:bg-indigo-800">
