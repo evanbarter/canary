@@ -49,11 +49,20 @@
  * .bg-pattern-graph-paper { ... }
  * .skew-45 { ... }
  */
-#image-editor {
+#image-editor,
+#comment-editor {
     trix-toolbar .trix-button-group--block-tools,
     trix-toolbar .trix-button-group--file-tools {
         display: none !important;
     }
+}
+
+.bg-gradient-alt {
+    background: linear-gradient(135deg, rgba(85,60,154,1) 0%, rgba(90,103,216,1) 90%);
+}
+
+.bg-gradient-alt:hover {
+    background: linear-gradient(135deg, rgba(60,54,107,1) 0%, rgba(76,81,191,1) 90%);
 }
 
 .bg-gradient-brand {
