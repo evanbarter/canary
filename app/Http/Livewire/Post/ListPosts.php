@@ -22,9 +22,9 @@ class ListPosts extends Component
 
     public function mount()
     {
-        if (Route::currentRouteName() === 'feed') {
+        if (in_array(Route::currentRouteName(), ['feed', 'feed.post.view'])) {
             $this->feed = true;
-        } else if (Route::currentRouteName() === 'post.view' || Route::currentRouteName() === 'feed.post.view') {
+        } else if (in_array(Route::currentRouteName(), ['post.view', 'feed.post.view'])) {
             $post = Post::find(Route::current()->parameter('post'));
             if ($post->postable_type === 'text') {
                 $this->show = false;
