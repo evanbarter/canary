@@ -30,10 +30,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Relation::morphMap([
-            'user' => 'App\User',
-            'peer' => 'App\Peer',
-            'text' => 'App\Text',
             'image' => 'App\Image',
+            'peer' => 'App\Peer',
+            'post' => 'App\Post',
+            'text' => 'App\Text',
+            'user' => 'App\User',
         ]);
 
         Peer::observe(PeerObserver::class);
