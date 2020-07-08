@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Peer;
 use App\Post;
+use App\Comment;
 use App\Observers\PeerObserver;
 use App\Observers\PostObserver;
+use App\Observers\CommentObserver;
 use App\Http\Requests\PeerRequest;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -39,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
 
         Peer::observe(PeerObserver::class);
         Post::observe(PostObserver::class);
+        Comment::observe(CommentObserver::class);
 
         $this->app->resolving(PeerRequest::class, function ($request, $app) {
             PeerRequest::createFrom($app['request'], $request);
