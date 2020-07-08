@@ -18,7 +18,7 @@ class PeerSyndicatePost implements ShouldQueue
     /** @var App\Peer */
     protected Peer $peer;
 
-    /** @var App\Peer */
+    /** @var App\Post */
     protected Post $post;
 
     /** @var string */
@@ -43,7 +43,7 @@ class PeerSyndicatePost implements ShouldQueue
      */
     public function handle()
     {
-        $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate';
+        $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate/post';
 
         $transformer = '\App\Transformers\\' . ucfirst($this->post->postable_type) . 'PostTransformer';
         if ($this->event !== 'deleted' && class_exists($transformer)) {

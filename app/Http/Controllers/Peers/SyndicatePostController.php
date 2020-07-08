@@ -11,12 +11,12 @@ use App\Actions\UpdateTextPost;
 use App\Actions\CreateImagePost;
 use App\Actions\UpdateImagePost;
 
-class SyndicateController extends Controller
+class SyndicatePostController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PeerRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(PeerRequest $request)
