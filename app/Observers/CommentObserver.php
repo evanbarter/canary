@@ -31,7 +31,6 @@ class CommentObserver
 
     private function notifyPeer(Comment $comment, string $event)
     {
-        dump($comment->commentable->sourceable);
         PeerSyndicateComment::dispatch(
             $comment->commentable->sourceable,
             $comment->commentable,
