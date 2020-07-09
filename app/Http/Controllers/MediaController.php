@@ -15,6 +15,9 @@ class MediaController extends Controller
      */
     public function __invoke(Request $request, Media $media)
     {
+        // Medialibrary's toResponse sets this but for this app, caching images
+        // for awhile is preferred.
+        header('Cache-control: max-age=300');
         return $media;
     }
 }
