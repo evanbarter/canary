@@ -31,12 +31,13 @@ class SyndicateCommentController extends Controller
             case 'saved':
                 if (!$comment) {
                     $comment = new Comment;
+                    $comment->uuid = $comment_data->uuid;
                     $comment->comment = $comment_data->comment;
                     $comment->sourceable()->associate($peer);
                     $comment->commentable()->associate($post);
                     $comment->save();
                 } else {
-
+                    $comment->update(['comment' => $comment_data->comment]);
                 }
                 break;
         }
