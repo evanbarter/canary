@@ -33,4 +33,9 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    public function getSyndicatableAttribute()
+    {
+        return $this->sourceable()->first()->is(auth()->user());
+    }
 }

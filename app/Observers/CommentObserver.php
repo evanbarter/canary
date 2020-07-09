@@ -31,11 +31,13 @@ class CommentObserver
 
     private function notifyPeer(Comment $comment, string $event)
     {
-        PeerSyndicateComment::dispatch(
-            $comment->commentable->sourceable,
-            $comment->commentable,
-            $comment,
-            $event
-        );
+        if ($comment->syndicatable) {
+            PeerSyndicateComment::dispatch(
+                $comment->commentable->sourceable,
+                $comment->commentable,
+                $comment,
+                $event
+            );
+        }
     }
 }
