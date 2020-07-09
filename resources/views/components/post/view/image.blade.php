@@ -56,11 +56,15 @@
                     <div class="flex-1">
                         @foreach ($post->postable->getMedia('images') as $image)
                         @if (!empty($post->postable->description[$loop->index]))
-                        <div class="text-sm" x-show="({{ $loop->index }} + 1) === active">{!! $post->postable->description[$loop->index] !!}<hr class="mt-5" /></div>
+                        <div class="text-sm" x-show="({{ $loop->index }} + 1) === active">{!! $post->postable->description[$loop->index] !!}<hr class="my-5" /></div>
                         @endif
                         @endforeach
                         @if ($post->syndicated)
                         <livewire:post.comment-form :id="$post->id" />
+                        @else
+                        @foreach($post->comments as $comment)
+                        <x-post.comment :comment="$comment" />
+                        @endforeach
                         @endif
                     </div>
                     <div class="flex flex-row-reverse">

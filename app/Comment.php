@@ -38,4 +38,9 @@ class Comment extends Model
     {
         return $this->sourceable()->first()->is(auth()->user());
     }
+
+    public function getSyndicatedAttribute()
+    {
+        return !$this->sourceable()->first()->is(auth()->user());
+    }
 }
