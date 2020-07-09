@@ -23,5 +23,6 @@ Route::prefix('v1')->group(function () {
         Route::post('peers/handshake/response', 'Peers\HandshakeResponseController')->name('peers.handshake.response');
         Route::post('peers/handshake/complete', 'Peers\HandshakeCompleteController')->name('peers.handshake.complete');
         Route::post('peers/syndicate/post', 'Peers\SyndicatePostController')->name('peers.syndicate.post');
+        Route::post('peers/syndicate/comment', 'Peers\SyndicateCommentController')->name('peers.syndicate.comment');
     });
 });
