@@ -6,6 +6,7 @@ use App\Post;
 use App\Comment;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
 class CommentForm extends Component
 {
@@ -20,6 +21,8 @@ class CommentForm extends Component
 
     /** @var bool */
     public $editing = true;
+
+    protected $listeners = ['commentSave' => 'save'];
 
     public function mount($id)
     {
@@ -43,8 +46,10 @@ class CommentForm extends Component
         $this->editing = !$this->editing;
     }
 
-    public function save()
+    public function save($data)
     {
+        $this->comment = Arr::get($data, 'comment');
+
         if ($this->existing) {
             $this->existing->update(['comment' => $this->comment]);
         } else {
