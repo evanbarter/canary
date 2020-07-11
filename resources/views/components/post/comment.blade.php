@@ -1,3 +1,4 @@
+@if ($comment)
 <div class="p-3 mb-3 text-sm relative bg-white shadow-lg rounded-lg">
     @if (!$comment->syndicated)
     <span wire:click="edit" class="absolute mt-1 top-0 right-0">
@@ -11,3 +12,4 @@
         </span>
     </div>
 </div>
+@endif

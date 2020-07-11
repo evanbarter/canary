@@ -26,5 +26,16 @@
             }
         }
     }
+    function commentForm() {
+        return {
+            save() {
+                if (typeof this.$refs.comment.value !== 'undefined') {
+                    window.livewire.emit('commentSave', {
+                        comment: this.$refs.comment.value
+                    })
+                }
+            }
+        }
+    }
 </script>
 @endpush

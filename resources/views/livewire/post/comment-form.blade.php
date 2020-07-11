@@ -1,9 +1,9 @@
 <div x-data="commentForm()" class="mt-5">
     @if ($editing)
     <div id="comment-editor">
-        <input x-ref="comment" id="comment" type="hidden" name="comment">
+        <input x-ref="comment" id="comment" type="hidden" name="comment" value="{{ $comment }}">
         <div wire:ignore>
-            <trix-editor wire:model.debounce="comment" input="comment"></trix-editor>
+            <trix-editor input="comment"></trix-editor>
         </div>
     </div>
     <div class="flex flex-row-reverse">
@@ -19,16 +19,3 @@
     <x-post.comment :comment="$existing" />
     @endif
 </div>
-@push('scripts')
-<script>
-    function commentForm() {
-        return {
-            save() {
-                window.livewire.emit('commentSave', {
-                    comment: this.$refs.comment.value
-                })
-            }
-        }
-    }
-</script>
-@endpush
