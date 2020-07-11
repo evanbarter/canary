@@ -22,8 +22,8 @@ class PeerSyndicateComment implements ShouldQueue
     /** @var App\Post */
     protected Post $post;
 
-    /** @var App\Peer */
-    protected Comment $comment;
+    /** @var App\Comment|array */
+    protected $comment;
 
     /** @var string */
     protected string $event;
@@ -33,7 +33,7 @@ class PeerSyndicateComment implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Peer $peer, Post $post, Comment $comment, string $event)
+    public function __construct(Peer $peer, Post $post, $comment, string $event)
     {
         $this->peer = $peer;
         $this->post = $post;
@@ -50,11 +50,18 @@ class PeerSyndicateComment implements ShouldQueue
     {
         $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate/comment';
 
+        // For certain events, we might not have a model.
+        if (in_array($this->event, ['deleted'])) {
+            $comment = json_encode($this->comment);
+        } else {
+            $comment = $this->comment->toJson();
+        }
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->peer->token,
         ])->post($url, [
             'post' => json_encode($this->post->only(['uuid'])),
-            'comment' => $this->comment->toJson(),
+            'comment' =>  $comment,
             'event' => $this->event,
         ]);
     }

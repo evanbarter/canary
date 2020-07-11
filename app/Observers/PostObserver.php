@@ -55,7 +55,11 @@ class PostObserver
         // Make sure this post should be syndicated and was created by a user.
         if (($event === 'saved' && $post->syndicatable) || $event === 'deleted') {
             foreach (Peer::verified()->get() as $peer) {
-                PeerSyndicatePost::dispatch($peer, $post, $event);
+                PeerSyndicatePost::dispatch(
+                    $peer,
+                    in_array($event, ['deleted']) ? $post->only(['uuid']) : $post,
+                    $event
+                );
             }
         }
     }

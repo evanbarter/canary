@@ -26,7 +26,7 @@ class CommentObserver
      */
     public function deleting(Comment $comment)
     {
-        //
+        $this->notifyPeer($comment, 'deleted');
     }
 
     private function notifyPeer(Comment $comment, string $event)
@@ -35,7 +35,7 @@ class CommentObserver
             PeerSyndicateComment::dispatch(
                 $comment->commentable->sourceable,
                 $comment->commentable,
-                $comment,
+                in_array($event, ['deleted']) ? $comment->only(['uuid']) : $comment,
                 $event
             );
         }

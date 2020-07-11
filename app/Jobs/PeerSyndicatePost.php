@@ -18,8 +18,8 @@ class PeerSyndicatePost implements ShouldQueue
     /** @var App\Peer */
     protected Peer $peer;
 
-    /** @var App\Post */
-    protected Post $post;
+    /** @var App\Post|array */
+    protected $post;
 
     /** @var string */
     protected string $event;
@@ -29,7 +29,7 @@ class PeerSyndicatePost implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Peer $peer, Post $post, string $event)
+    public function __construct(Peer $peer, $post, string $event)
     {
         $this->peer = $peer;
         $this->post = $post;
@@ -45,15 +45,20 @@ class PeerSyndicatePost implements ShouldQueue
     {
         $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate/post';
 
-        $transformer = '\App\Transformers\\' . ucfirst($this->post->postable_type) . 'PostTransformer';
-        if ($this->event !== 'deleted' && class_exists($transformer)) {
-            $post = fractal()
-               ->item($this->post)
-               ->transformWith(new $transformer())
-               ->serializeWith(new \Spatie\Fractalistic\ArraySerializer())
-               ->toJson();
+        // For certain events, we might not have a model.
+        if (in_array($this->event, ['deleted'])) {
+            $post = json_encode($this->post);
         } else {
-            $post = $this->post->toJson();
+            $transformer = '\App\Transformers\\' . ucfirst($this->post->postable_type) . 'PostTransformer';
+            if ($this->event !== 'deleted' && class_exists($transformer)) {
+                $post = fractal()
+                   ->item($this->post)
+                   ->transformWith(new $transformer())
+                   ->serializeWith(new \Spatie\Fractalistic\ArraySerializer())
+                   ->toJson();
+            } else {
+                $post = $this->post->toJson();
+            }
         }
 
         $response = Http::withHeaders([
