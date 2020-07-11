@@ -46,6 +46,13 @@ class CommentForm extends Component
         $this->editing = !$this->editing;
     }
 
+    public function delete()
+    {
+        $this->existing->delete();
+        $this->editing = true;
+        $this->existing = false;
+    }
+
     public function save($data)
     {
         $this->comment = Arr::get($data, 'comment');
