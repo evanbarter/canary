@@ -18,6 +18,6 @@ class MediaController extends Controller
         // Medialibrary's toResponse sets this but for this app, caching images
         // for awhile is preferred.
         header('Cache-control: max-age=3600');
-        return $media;
+        return response()->download($media->getPath('optimized'), $media->file_name);
     }
 }

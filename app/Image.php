@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -27,6 +28,15 @@ class Image extends Model implements HasMedia
         'title' => 'array',
         'description' => 'array',
     ];
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('optimized')
+              ->width(1920)
+              ->height(1080)
+              ->optimize()
+              ->nonQueued();
+    }
 
     public function post()
     {
