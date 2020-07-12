@@ -7,7 +7,7 @@ module.exports = {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
             screens: {
-                'dark-mode': { raw: '(prefers-color-scheme: dark)' }
+                // 'dark-mode': { raw: '(prefers-color-scheme: dark)' }
             },
             opacity: {
                 '85': '0.85',
