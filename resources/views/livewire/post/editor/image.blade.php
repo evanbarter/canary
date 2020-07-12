@@ -66,38 +66,40 @@
                     <span class="block text-xs">Pinned Posts always appear at the top of your Post list.</span>
                 </div>
                 @endif
-                <div class="mt-6 grid grid-cols-3 gap-5">
+                <div wire:sortable="updateOrder" class="mt-6">
                     @foreach ($images as $image)
-                    <div class="col-span-1 relative overflow-visible">
-                        @if (!$post || ($post && count($images) > 1 && $layout === 'gallery'))
-                        <div wire:click="remove({{ $loop->index }})" class="absolute top-0 right-0 -mr-2 -mt-2 p-1 h-6 w-6 z-10 bg-black text-white shadow rounded-full cursor-pointer hover:bg-gray-700">
-                            <svg class="h-full w-full" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </div>
-                        @endif
-                        <img class="object-cover rounded @error('images.' . $loop->index) border-4 border-red-300 @enderror" src="{{ !$post ? $image->temporaryUrl() : $image->getUrl() }}">
-                    </div>
-                    <div class="col-span-2">
-                        <div>
-                            <label for="title-{{ $loop->index }}" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
-                                {{ __('Title') }}
-                            </label>
-                            <div class="mt-1 rounded-md shadow-sm">
-                                <input wire:model.lazy="titles.{{ $loop->index }}" id="title-{{ $loop->index }}" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('titles.' . $loop->index) border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                    <div wire:sortable.item="image-{{ $loop->index }}" wire:key="image-{{ $loop->index }}" class="flex mb-5">
+                        <div wire:sortable.handle class="w-1/3 relative overflow-visible">
+                            @if (!$post || ($post && count($images) > 1 && $layout === 'gallery'))
+                            <div wire:click="remove({{ $loop->index }})" class="absolute top-0 right-0 -mr-2 -mt-2 p-1 h-6 w-6 z-10 bg-black text-white shadow rounded-full cursor-pointer hover:bg-gray-700">
+                                <svg class="h-full w-full" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
                             </div>
-                            @error('titles.' . $loop->index)
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @endif
+                            <img class="object-cover rounded @error('images.' . $loop->index) border-4 border-red-300 @enderror" src="{{ !$post ? $image->temporaryUrl() : $image->getUrl() }}">
+                        </div>
+                        <div class="w-2/3 pl-5">
+                            <div>
+                                <label for="title-{{ $loop->index }}" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
+                                    {{ __('Title') }}
+                                </label>
+                                <div class="mt-1 rounded-md shadow-sm">
+                                    <input wire:model.lazy="titles.{{ $loop->index }}" id="title-{{ $loop->index }}" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('titles.' . $loop->index) border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                                </div>
+                                @error('titles.' . $loop->index)
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div wire:ignore class="mt-3">
+                                <label for="description-{{ $loop->index }}" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
+                                    {{ __('Description') }}
+                                </label>
+                                <input id="description-{{ $loop->index }}" type="hidden" name="content">
+                                <trix-editor wire:model.debounce="descriptions.{{ $loop->index }}" input="description-{{ $loop->index }}"></trix-editor>
+                            </div>
+                            @error('images.' . $loop->index)
+                                <p class="mt-2 text-sm text-red-600">{{ str_replace('images.' . $loop->index, __('Image'), $message) }}</p>
                             @enderror
                         </div>
-                        <div wire:ignore class="mt-3">
-                            <label for="description-{{ $loop->index }}" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
-                                {{ __('Description') }}
-                            </label>
-                            <input id="description-{{ $loop->index }}" type="hidden" name="content">
-                            <trix-editor wire:model.debounce="descriptions.{{ $loop->index }}" input="description-{{ $loop->index }}"></trix-editor>
-                        </div>
-                        @error('images.' . $loop->index)
-                            <p class="mt-2 text-sm text-red-600">{{ str_replace('images.' . $loop->index, __('Image'), $message) }}</p>
-                        @enderror
                     </div>
                     @endforeach
                 </div>

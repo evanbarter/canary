@@ -15,6 +15,7 @@ require('laravel-mix-bundle-analyzer');
  */
 
 mix.js("resources/js/app.js", "public/js/app.js")
+    .js("resources/js/sort.js", "public/js/sort.js")
     .sass("resources/sass/app.scss", "public/css/app.css")
     .tailwind("./tailwind.config.js")
     .sourceMaps();

@@ -29,6 +29,7 @@
 
         <script src="{{ mix('js/app.js') }}"></script>
         <livewire:scripts>
+        <script src="{{ mix('js/sort.js') }}"></script>
         @stack('scripts')
     </body>
 </html>

@@ -57,6 +57,16 @@ class Image extends Component
         $this->reset();
     }
 
+    public function updateOrder($sorted)
+    {
+        $updated = [];
+        foreach ($sorted as $item) {
+            list(, $key) = explode('-', $item['value']);
+            $updated[] = $this->images[$key];
+        }
+        $this->images = $updated;
+    }
+
     public function remove(int $index)
     {
         if (!$this->post) {
