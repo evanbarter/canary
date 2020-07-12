@@ -32,6 +32,14 @@
                     <p class="text-xs pt-1" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
                 </div>
                 {!! $post->postable->text !!}
+                <hr class="my-8">
+                @if ($post->syndicated)
+                <livewire:post.comment-form :id="$post->id" />
+                @else
+                @foreach($post->comments as $comment)
+                <x-post.comment :comment="$comment" />
+                @endforeach
+                @endif
             </div>
         </div>
     </div>
