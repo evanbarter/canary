@@ -26,7 +26,7 @@ Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 Route::get('password/reset/{token}', 'Auth\PasswordResetController')->name('password.reset');
 
 Route::view('/', 'home')->name('home');
-Route::view('post/{post}', 'home')->name('post.view');
+Route::view('post/{post:slug}', 'home')->name('post.view');
 Route::get('media/{media}', 'MediaController')->name('media.view')->middleware(MediaAuthentication::class);
 
 Route::middleware('auth')->group(function () {

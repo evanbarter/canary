@@ -9,6 +9,17 @@ use App\Jobs\PeerSyndicatePost;
 class PostObserver
 {
     /**
+     * Handle the post "saving" event.
+     *
+     * @param  \App\Post  $post
+     * @return void
+     */
+    public function saving(Post $post)
+    {
+        $post->slug = \Str::slug($post->postable->title_for_slug);
+    }
+
+    /**
      * Handle the post "saved" event.
      *
      * @param  \App\Post  $post

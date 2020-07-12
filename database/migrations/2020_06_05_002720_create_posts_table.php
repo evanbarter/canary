@@ -17,10 +17,10 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->timestamps();
-            $table->unsignedInteger('sourceable_id');
-            $table->string('sourceable_type');
-            $table->unsignedInteger('postable_id');
-            $table->string('postable_type');
+            $table->morphs('sourceable');
+            $table->morphs('postable');
+            $table->boolean('pinned')->default(false);
+            $table->string('slug')->nullable();
             $table->tinyInteger('visibility')->default(1);
         });
     }

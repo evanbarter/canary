@@ -42,4 +42,9 @@ class Image extends Model implements HasMedia
     {
         return $this->morphOne(Post::class, 'postable');
     }
+
+    public function getTitleForSlugAttribute()
+    {
+        return $this->title[0];
+    }
 }

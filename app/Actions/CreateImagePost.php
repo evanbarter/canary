@@ -72,6 +72,7 @@ class CreateImagePost extends Action
 
         $post->uuid = $this->uuid ?? null;
         $post->visibility = $this->visibility ?? 1;
+        $post->pinned = $this->pinned ?? false;
         $post->sourceable()->associate($this->source ?? auth()->user());
         $post->postable()->associate($image);
         $post->save();

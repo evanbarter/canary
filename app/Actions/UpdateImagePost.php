@@ -63,6 +63,7 @@ class UpdateImagePost extends Action
         }
 
         $this->post->visibility = $this->visibility ?? 1;
+        $this->post->pinned = $this->pinned ?? 1;
         $this->post->save();
     }
 }

@@ -47,6 +47,7 @@ class UpdateTextPost extends Action
         }
 
         $this->post->visibility = $this->visibility ?? 1;
+        $this->post->pinned = $this->pinned ?? false;
         $this->post->save();
     }
 }

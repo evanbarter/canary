@@ -58,6 +58,14 @@
                 </div>
                 @endif
                 @if ($images)
+                @if ($layout === 'gallery' || count($images) === 1)
+                <div class="mt-3">
+                    <label for="pinned-post" class="text-sm">
+                        <input id="pinned-post" class="form-checkbox text-orange-600" wire:model="pinned" type="checkbox" name="pinned"> {{ __('Pinned') }}
+                    </label>
+                    <span class="block text-xs">Pinned Posts always appear at the top of your Post list.</span>
+                </div>
+                @endif
                 <div class="mt-6 grid grid-cols-3 gap-5">
                     @foreach ($images as $image)
                     <div class="col-span-1 relative overflow-visible">

@@ -13,6 +13,9 @@ class Text extends Component
     /** @var int */
     public $visibility = 1;
 
+    /** @var bool */
+    public $pinned = false;
+
     /** @var string */
     public $title = '';
 
@@ -34,6 +37,7 @@ class Text extends Component
 
         $this->post = $post;
         $this->visibility = $post->visibility;
+        $this->pinned = $post->pinned;
         $this->title = $post->postable->title;
         $this->text = $post->postable->text;
 
@@ -63,10 +67,11 @@ class Text extends Component
     private function create()
     {
         CreateTextPost::dispatch([
+            'source' => auth()->user(),
             'title' => $this->title,
             'text' => $this->text,
             'visibility' => $this->visibility,
-            'source' => auth()->user(),
+            'pinned' => $this->pinned,
         ]);
     }
 
@@ -77,6 +82,7 @@ class Text extends Component
             'title' => $this->title,
             'text' => $this->text,
             'visibility' => $this->visibility,
+            'pinned' => $this->pinned,
         ]);
 
         return redirect()->route('post.view', $this->post);

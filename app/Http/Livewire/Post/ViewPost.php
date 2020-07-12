@@ -19,7 +19,7 @@ class ViewPost extends Component
 
     public function open($id)
     {
-        $this->post = Post::find($id);
+        $this->post = Post::where('slug', $id)->firstOrFail();
         if ($this->post->postable_type === 'text') {
             $this->emit('hideList');
         }
@@ -34,7 +34,7 @@ class ViewPost extends Component
     public function mount()
     {
         if (Route::currentRouteName() === 'post.view' || Route::currentRouteName() === 'feed.post.view') {
-            $this->post = Post::findOrFail(Route::current()->parameter('post'));
+            $this->post = Post::where('slug', Route::current()->parameter('post'))->firstOrFail();
             $this->start_visible = true;
         }
     }

@@ -15,6 +15,9 @@ class Image extends Component
     /** @var int */
     public $visibility = 1;
 
+    /** @var bool */
+    public $pinned = false;
+
     /** @var array */
     public $images = [];
 
@@ -40,6 +43,7 @@ class Image extends Component
 
         $this->post = $post;
         $this->visibility = $post->visibility;
+        $this->pinned = $post->pinned;
         $this->titles = $post->postable->title;
         $this->descriptions = $post->postable->description;
         $this->images = $post->postable->getMedia('images');
@@ -94,6 +98,7 @@ class Image extends Component
             'titles' => $this->titles,
             'descriptions' => $this->descriptions,
             'visibility' => $this->visibility,
+            'pinned' => $this->pinned,
             'images' => $this->images,
         ]);
 
@@ -110,6 +115,7 @@ class Image extends Component
             'titles' => $this->titles,
             'descriptions' => $this->descriptions,
             'visibility' => $this->visibility,
+            'pinned' => $this->pinned,
             'layout' => $this->layout,
             'source' => auth()->user(),
             'images' => $images,

@@ -11,6 +11,9 @@ class ListPosts extends Component
     /** @var array */
     public $posts;
 
+    /** @var array */
+    public $pinned;
+
     /** @var bool */
     public $show = true;
 
@@ -26,7 +29,7 @@ class ListPosts extends Component
             $this->feed = true;
         }
         if (in_array(Route::currentRouteName(), ['post.view', 'feed.post.view'])) {
-            $post = Post::find(Route::current()->parameter('post'));
+            $post = Post::where('slug', Route::current()->parameter('post'))->firstOrFail();
             if ($post->postable_type === 'text') {
                 $this->show = false;
             }
@@ -39,9 +42,14 @@ class ListPosts extends Component
         if ($this->feed) {
             $this->posts = Post::syndicated()->orderBy('created_at', 'desc')->get();
         } else {
-            $this->posts = auth()->user()
-                ? Post::local()->orderBy('created_at', 'desc')->get()
-                : Post::local()->public()->orderBy('created_at', 'desc')->get();
+            $posts = Post::local()->orderBy('created_at', 'desc');
+
+            if (!auth()->user()) {
+                $posts->public();
+            }
+
+            $this->pinned = (clone $posts)->where('pinned', true)->get();
+            $this->posts = $posts->where('pinned', false)->get();
         }
     }
 

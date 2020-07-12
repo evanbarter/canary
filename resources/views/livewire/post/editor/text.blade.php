@@ -9,6 +9,12 @@
                     <x-post.visibility type="{{ __('Post') }}" visibility="{{ $visibility }}" />
                 </div>
                 <div class="mt-3">
+                    <label for="pinned-post" class="text-sm">
+                        <input id="pinned-post" class="form-checkbox text-orange-600" wire:model="pinned" type="checkbox" name="pinned"> {{ __('Pinned') }}
+                    </label>
+                    <span class="block text-xs">Pinned Posts always appear at the top of your Post list.</span>
+                </div>
+                <div class="mt-3">
                     <label for="title" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Title') }}
                     </label>

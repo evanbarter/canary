@@ -51,6 +51,7 @@ class CreateTextPost extends Action
 
         $post->uuid = $this->uuid ?? null;
         $post->visibility = $this->visibility ?? 1;
+        $post->pinned = $this->pinned ?? false;
         $post->sourceable()->associate($this->source);
         $post->postable()->associate($text);
         $post->save();
