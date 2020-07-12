@@ -8,7 +8,7 @@
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         class="fixed inset-0 transition-opacity">
-      <div @click="$store.postModal.open = null" class="absolute inset-0 bg-gray-500 dark-mode:bg-gray-800 opacity-75"></div>
+      <div @click="$store.postModal.open = null; window.livewire.emit('postEditorStopEditing')" class="absolute inset-0 bg-gray-500 dark-mode:bg-gray-800 opacity-75"></div>
     </div>
 
     <div

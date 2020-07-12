@@ -28,7 +28,8 @@ class Text extends Component
     /** @var array */
     protected $listeners = [
         'postEditorTextSave' => 'save',
-        'postEditorTextEdit' => 'startEditing'
+        'postEditorTextEdit' => 'startEditing',
+        'postEditorStopEditing' => 'stopEditing',
     ];
 
     public function startEditing($id)
@@ -42,6 +43,11 @@ class Text extends Component
         $this->text = $post->postable->text;
 
         $this->emit('postEditorTextReady');
+    }
+
+    public function stopEditing()
+    {
+        $this->reset();
     }
 
     public function delete()
@@ -62,6 +68,7 @@ class Text extends Component
         $this->post ? $this->update() : $this->create();
 
         $this->emit('postEditorSaved');
+        $this->stopEditing();
     }
 
     private function create()

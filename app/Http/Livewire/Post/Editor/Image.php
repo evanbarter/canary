@@ -35,6 +35,7 @@ class Image extends Component
 
     protected $listeners = [
         'postEditorImageEdit' => 'startEditing',
+        'postEditorStopEditing' => 'stopEditing',
     ];
 
     public function startEditing($id)
@@ -49,6 +50,11 @@ class Image extends Component
         $this->images = $post->postable->getMedia('images');
 
         $this->emit('postEditorReady');
+    }
+
+    public function stopEditing()
+    {
+        $this->reset();
     }
 
     public function remove(int $index)
@@ -84,6 +90,7 @@ class Image extends Component
 
 
         $this->emit('postEditorSaved');
+        $this->stopEditing();
     }
 
     public function render()
