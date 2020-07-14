@@ -8,7 +8,7 @@
         x-transition:leave-start="opacity-100 transform scale-100"
         x-transition:leave-end="opacity-0 transform scale-90"
         class="grid w-4/5 p-8 grid-cols-1 sm:grid-cols-3 gap-8 z-0">
-        @if ($pinned)
+        @if (count($pinned))
         @foreach($pinned as $post)
         @include('components.post.list.' . $post->postable_type, ['post' => $post])
         @endforeach
