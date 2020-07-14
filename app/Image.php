@@ -45,6 +45,6 @@ class Image extends Model implements HasMedia
 
     public function getTitleForSlugAttribute()
     {
-        return $this->title[0];
+        return $this->title[0] ?? null;
     }
 }
