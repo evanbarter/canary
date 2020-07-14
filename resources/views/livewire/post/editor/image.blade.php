@@ -1,5 +1,5 @@
 <form id="image-editor">
-    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark-mode:bg-gray-900 dark-mode:text-white">
+    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark-mode:bg-gray-900 dark-mode:text-white max-h-11/12 overflow-scroll">
         <div class="flex flex-col items-start">
             <div class="w-full mt-3 text-left sm:mt-0">
                 <h3 class="text-lg leading-6 font-medium text-gray-900 dark-mode:text-gray-200" id="modal-headline">

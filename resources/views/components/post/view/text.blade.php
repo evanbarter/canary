@@ -8,7 +8,7 @@
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 transform scale-100"
     x-transition:leave-end="opacity-0 transform scale-90"
-    class="absolute inset-0 py-12 pb-16 flex justify-center">
+    class="absolute inset-0 pt-12 flex justify-center {{ auth()->user() ? 'pb-16' : 'mb-12' }}">
     <div class="flex flex-col w-4/5 sm:max-w-4xl">
         <div class="flex">
             <h1 id="modal-headline" class="flex-1 mb-4 font-light italic text-xl sm:text-3xl leading-tight text-gray-900 dark-mode:text-gray-400">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="h-full overflow-y-scroll dark-mode:border dark-mode:bg-gray-900 dark-mode:border-gray-800">
-            <div class="text-sm pb-8 sm:text-base dark-mode:text-gray-200">
+            <div class="text-sm px-3 pb-8 sm:text-base dark-mode:text-gray-200">
                 <div class="flex mb-6">
                     @if ($post->syndicated)
                     <span class="text-xs text-white shadow-md rounded-full py-1 px-3 bg-gradient-brand border border-red-400 mr-3">
@@ -31,8 +31,12 @@
                     @endif
                     <p class="text-xs pt-1" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
                 </div>
-                {!! $post->postable->text !!}
-                <hr class="my-8">
+                <article class="prose prose-lg max-w-none pr-6">
+                    {!! $post->postable->text !!}
+                </article>
+                @if ($post->syndicated || count($post->comments))
+                <hr class="my-8 mx-4">
+                @endif
                 @if ($post->syndicated)
                 <livewire:post.comment-form :id="$post->id" />
                 @else

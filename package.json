@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@ryangjchandler/spruce": "^0.6.0",
+        "@tailwindcss/typography": "^0.1.2",
         "trix": "^1.2.3"
     }
 }
