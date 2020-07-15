@@ -12,7 +12,7 @@
     <div @click="show = false; setTimeout(() => {  $dispatch('post-close') }, 200)" class="fixed inset-0">
         <div class="absolute inset-0 bg-black dark-mode:bg-black opacity-75"></div>
     </div>
-    <div class="flex flex-col w-full sm:max-w-7xl z-50">
+    <div class="flex flex-col max-w-full overflow-scroll sm:max-w-7xl z-50">
         <div x-data="gallery()" x-init="init({{ $post->postable->getMedia('images')->count() }})">
             <div class="flex">
                 <h1 id="modal-headline" class="flex-1 mb-4 font-thin italic text-xl sm:text-3xl leading-tight text-white dark-mode:text-gray-400">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="flex shadow-lg">
-                <div class="w-2/3 relative">
+                <div class="max-w-2/3 relative">
                     @if ($post->postable->getMedia('images')->count() === 1)
                     <img class="object-cover" src="{{ $post->postable->getFirstMediaUrl('images') }}">
                     @else
@@ -52,7 +52,7 @@
                     </div>
                     @endif
                 </div>
-                <div class="flex flex-col w-1/3 p-6 shadow-inner bg-gray-50">
+                <div class="flex-grow flex flex-col w-1/3 p-6 shadow-inner bg-gray-50">
                     <div class="flex-1">
                         @foreach ($post->postable->getMedia('images') as $image)
                         @if (!empty($post->postable->description[$loop->index]))
