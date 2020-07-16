@@ -61,7 +61,7 @@
                         @endforeach
                         @if ($post->syndicated)
                         <livewire:post.comment-form :id="$post->id" />
-                        @else
+                        @elseif (auth()->user())
                         @foreach($post->comments as $comment)
                         <x-post.comment :comment="$comment" />
                         @endforeach
