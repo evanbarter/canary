@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="h-full overflow-y-scroll dark-mode:border dark-mode:bg-gray-900 dark-mode:border-gray-800">
-            <div class="text-sm px-3 pb-8 sm:text-base dark-mode:text-gray-200">
+            <div class="text-sm pr-3 pb-8 sm:text-base dark-mode:text-gray-200">
                 <div class="flex mb-6">
                     @if ($post->syndicated)
                     <span class="text-xs text-white shadow-md rounded-full py-1 px-3 bg-gradient-brand border border-red-400 mr-3">
