@@ -11,7 +11,7 @@
     class="absolute inset-0 pt-12 flex justify-center {{ auth()->user() ? 'pb-16' : 'mb-12' }}">
     <div class="flex flex-col w-4/5 sm:max-w-4xl">
         <div class="flex">
-            <h1 id="modal-headline" class="flex-1 mb-4 font-light italic text-xl sm:text-3xl leading-tight text-gray-900 dark-mode:text-gray-400">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
+            <h1 id="modal-headline" class="flex-1 mb-4 font-extrabold italic text-xl sm:text-5xl leading-tight text-gray-900 dark-mode:text-gray-400">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
             <div class="flex items-end ml-6 mb-4 text-gray-700 dark-mode:text-gray-200">
                 @can('update', $post)
                 <span @click="window.livewire.emit('postEditorTextEdit', {{ $post->id }}); $store.postModal.open = 'text'">
@@ -31,7 +31,7 @@
                     @endif
                     <p class="text-xs pt-1" title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</p>
                 </div>
-                <article class="prose prose-lg max-w-none pr-6">
+                <article class="prose prose max-w-none pr-6">
                     {!! $post->postable->text !!}
                 </article>
                 @if ($post->syndicated || count($post->comments))
