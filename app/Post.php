@@ -2,8 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
@@ -20,7 +20,7 @@ class Post extends Model
 
         static::creating(function ($post) {
             if (!$post->uuid) {
-                $post->uuid = \Str::uuid();
+                $post->uuid = Str::uuid();
             }
         });
     }
