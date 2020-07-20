@@ -1,0 +1,41 @@
+name: Build Assets
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'resources/**.js'
+      - 'resources/**.scss'
+      - 'resources/**.php'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'resources/**.js'
+      - 'resources/**.scss'
+      - 'resources/**.php'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: cd $GITHUB_WORKSPACE
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run build script
+      run: npm run prod
+
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v4.2.1
+      with:
+        add: 'public'
