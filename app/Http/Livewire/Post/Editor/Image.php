@@ -18,7 +18,7 @@ class Image extends Component
     /** @var bool */
     public $pinned = false;
 
-    /** @var array */
+    /** @var array|\Illuminate\Support\Collection */
     public $images = [];
 
     /** @var array */
