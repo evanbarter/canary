@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -19,7 +20,7 @@ class Comment extends Model
 
         static::creating(function ($comment) {
             if (!$comment->uuid) {
-                $comment->uuid = \Str::uuid();
+                $comment->uuid = Str::uuid();
             }
         });
     }
