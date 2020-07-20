@@ -35,6 +35,6 @@ jobs:
     - name: Add & Commit
       uses: EndBug/add-and-commit@v4.2.1
       with:
-        add: './public/*'
+        add: '.'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
