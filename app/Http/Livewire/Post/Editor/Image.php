@@ -94,11 +94,11 @@ class Image extends Component
     public function save()
     {
         $this->validate([
+            'images' => 'required',
             'images.*' => 'image|max:532480', // 5 MB Max
         ]);
 
         $this->post ? $this->update() : $this->create();
-
 
         $this->emit('postEditorSaved');
         $this->stopEditing();
