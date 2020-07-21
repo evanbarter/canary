@@ -7,6 +7,7 @@ use App\Actions\CreateImagePost;
 use App\Actions\UpdateImagePost;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Image extends Component
 {
@@ -125,7 +126,7 @@ class Image extends Component
     private function create()
     {
         $images = collect($this->images)->map(function ($image) {
-            return $image->temporaryUrl();
+            return Storage::putFile('uploads', $image);
         });
 
         CreateImagePost::dispatch([

@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Post;
 use App\Image;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Lorisleiva\Actions\Action;
 use Carbon\Carbon;
 
@@ -78,16 +79,16 @@ class CreateImagePost extends Action
         $post->save();
     }
 
-    private function fileAdder(Image $post, string $url)
+    private function fileAdder(Image $post, string $pathOrUrl)
     {
         if (!$this->source || $this->source->is(auth()->user())) {
-            $post->addMediaFromUrl($url)->toMediaCollection('images');
+            $post->addMedia(Storage::path($pathOrUrl))->toMediaCollection('images');
         } else {
             // Peer post, make an authenticated request in case it's not a
             // public image.
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->source->token,
-            ])->get($url);
+            ])->get($pathOrUrl);
 
             $temporary_file = tempnam(sys_get_temp_dir(), 'peer_');
             file_put_contents($temporary_file, $response->body());
