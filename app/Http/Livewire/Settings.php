@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Settings extends Component
 {
-    /** var bool */
+    /** @var bool */
     public $visible = false;
 
     /** @var string */
