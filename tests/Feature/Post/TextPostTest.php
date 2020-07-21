@@ -4,11 +4,11 @@ namespace Tests\Feature\Post;
 
 use App\User;
 use App\Post;
+use App\Text as TextPost;
 use App\Http\Livewire\Post\Editor\Text;
 use Tests\TestCase;
 use Livewire\Livewire;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
 
 class TextPostTest extends TestCase
 {
@@ -44,7 +44,7 @@ class TextPostTest extends TestCase
             ->set('title', 'foo')
             ->call('save', ['text' => 'bar']);
 
-        $this->assertTrue(Post::whereTitle('foo')->exists());
+        $this->assertTrue(TextPost::whereTitle('foo')->exists());
     }
 
     /** @test */
