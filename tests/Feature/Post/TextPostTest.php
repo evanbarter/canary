@@ -3,7 +3,6 @@
 namespace Tests\Feature\Post;
 
 use App\User;
-use App\Post;
 use App\Text as TextPost;
 use App\Http\Livewire\Post\Editor\Text;
 use Tests\TestCase;
