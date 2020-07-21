@@ -49,7 +49,7 @@ class Settings extends Component
             'password' => 'required|min:8|same:passwordConfirmation',
         ]);
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (Auth::attempt(['email' => $user->email, 'password' => $this->passwordCurrent])) {
             $user->password = Hash::make($this->password);
