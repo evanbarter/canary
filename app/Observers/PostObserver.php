@@ -17,7 +17,7 @@ class PostObserver
     public function saving(Post $post)
     {
 
-        $title = $post->postable->title_for_slug ?: \Str::uuid();;
+        $title = $post->postable->title_for_slug ?: \Str::uuid();
         $post->slug = \Str::slug($title);
     }
 
