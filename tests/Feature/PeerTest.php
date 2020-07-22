@@ -76,4 +76,39 @@ class PeerTest extends TestCase
 
         $response->assertRedirect(route('settings'));
     }
+
+    /** @test */
+    public function can_complete_peer()
+    {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user);
+
+        $this->expectsJobs(PeerHandshake::class);
+
+        // Simulate the set up of a Peer.
+        $peer = factory(Peer::class)->create(['name' => '', 'token' => '']);
+        // Setting a token for a peer is normally done in the initial
+        // PeerHandshake job we're expecting.
+        $token = $user->createToken(sprintf('%s token for %s', ucfirst('Peer'), $peer->url), [sprintf('peer:%d:%s', $peer->id, 'peer')])->plainTextToken;
+
+        // What we're actually testing is the Peer's response.
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->json('POST', '/api/v1/peers/handshake/response', [
+            'url' => $peer->url,
+            'name' => 'foo',
+            'token' => 'bar',
+        ]);
+
+        $this->assertEquals('', $peer->name);
+        $this->assertEquals('', $peer->token);
+        $this->assertNull($peer->verified_at);
+
+        $peer = $peer->fresh();
+
+        $this->assertEquals('foo', $peer->name);
+        $this->assertEquals('bar', $peer->token);
+        $this->assertNotNull($peer->verified_at);
+    }
 }
