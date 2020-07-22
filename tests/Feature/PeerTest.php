@@ -90,12 +90,12 @@ class PeerTest extends TestCase
         $peer = factory(Peer::class)->create(['name' => '', 'token' => '']);
         // Setting a token for a peer is normally done in the initial
         // PeerHandshake job we're expecting.
-        $token = $user->createToken(sprintf('%s token for %s', ucfirst('Peer'), $peer->url), [sprintf('peer:%d:%s', $peer->id, 'peer')])->plainTextToken;
+        $token = $user->createToken(sprintf('%s token for %s', 'Peer', $peer->url), [sprintf('peer:%d:%s', $peer->id, 'peer')])->plainTextToken;
 
         // What we're actually testing is the Peer's response.
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->json('POST', '/api/v1/peers/handshake/response', [
+        ])->json('POST', route('peers.handshake.response'), [
             'url' => $peer->url,
             'name' => 'foo',
             'token' => 'bar',
