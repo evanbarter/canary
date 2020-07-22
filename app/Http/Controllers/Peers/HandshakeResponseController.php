@@ -7,6 +7,7 @@ use App\Jobs\PeerHandshake;
 use App\Notifications\PeerComplete;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HandshakeResponseController extends Controller
 {
@@ -25,7 +26,7 @@ class HandshakeResponseController extends Controller
             'token' => $request->input('token'),
         ]);
 
-        $user = auth()->user();
+        $user = Auth::user();
         $user->tokens()->where('abilities', sprintf('peer:%d:handshake', $peer->id))->delete();
         $user->notify(new PeerComplete($peer));
 
