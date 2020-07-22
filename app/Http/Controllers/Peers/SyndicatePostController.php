@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Peers;
 
-use App\Peer;
 use App\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PeerRequest;
@@ -25,6 +24,8 @@ class SyndicatePostController extends Controller
 
         $post = Post::where('uuid', $post_data->uuid)->first();
         $peer = $request->peer();
+
+        abort_if(!$peer || !$peer->verified_at, 403);
 
         switch ($request->input('event')) {
             case 'deleted':
