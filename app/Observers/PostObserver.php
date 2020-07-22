@@ -70,7 +70,7 @@ class PostObserver
             foreach (Peer::verified()->get() as $peer) {
                 PeerSyndicatePost::dispatch(
                     $peer,
-                    in_array($event, ['deleted']) ? $post->only(['uuid']) : $post,
+                    $post->prepareForSyndication($event),
                     $event
                 );
             }

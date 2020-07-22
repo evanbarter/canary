@@ -18,7 +18,7 @@ class PeerSyndicatePost implements ShouldQueue
     /** @var App\Peer */
     protected Peer $peer;
 
-    /** @var App\Post|array */
+    /** @var string */
     protected $post;
 
     /** @var string */
@@ -45,27 +45,15 @@ class PeerSyndicatePost implements ShouldQueue
     {
         $url = rtrim($this->peer->url, '/') . '/api/v1/peers/syndicate/post';
 
-        // For certain events, we might not have a model.
-        if (in_array($this->event, ['deleted'])) {
-            $post = json_encode($this->post);
-        } else {
-            $transformer = '\App\Transformers\\' . ucfirst($this->post->postable_type) . 'PostTransformer';
-            if ($this->event !== 'deleted' && class_exists($transformer)) {
-                $post = fractal()
-                   ->item($this->post)
-                   ->transformWith(new $transformer())
-                   ->serializeWith(new \Spatie\Fractalistic\ArraySerializer())
-                   ->toJson();
-            } else {
-                $post = $this->post->toJson();
-            }
-        }
-
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->peer->token,
         ])->post($url, [
-            'post' => $post,
+            'post' => $this->post,
             'event' => $this->event,
         ]);
+
+        if ($response->status() !== 200) {
+            $response->throw(sprintf('Could not syndicate post to peer: %s', $this->peer->url));
+        }
     }
 }

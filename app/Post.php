@@ -80,4 +80,22 @@ class Post extends Model
     {
         return $this->sourceable_type === 'peer';
     }
+
+    public function prepareForSyndication(string $event): string
+    {
+        if (in_array($event, ['deleted'])) {
+            return json_encode($this->only(['uuid']));
+        } else {
+            $transformer = '\App\Transformers\\' . ucfirst($this->postable_type) . 'PostTransformer';
+            if ($event !== 'deleted' && class_exists($transformer)) {
+                return fractal()
+                    ->item($this)
+                    ->transformWith(new $transformer())
+                    ->serializeWith(new \Spatie\Fractalistic\ArraySerializer())
+                    ->toJson();
+            } else {
+                return $this->toJson();
+            }
+        }
+    }
 }
