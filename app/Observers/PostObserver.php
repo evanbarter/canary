@@ -16,7 +16,6 @@ class PostObserver
      */
     public function saving(Post $post)
     {
-
         $title = $post->postable->title_for_slug ?: \Str::uuid();
         $post->slug = \Str::slug($title);
     }
@@ -66,7 +65,7 @@ class PostObserver
     private function notifyPeers(Post $post, string $event)
     {
         // Make sure this post should be syndicated and was created by a user.
-        if (($event === 'saved' && $post->syndicatable) || $event === 'deleted') {
+        if ($post->syndicatable) {
             foreach (Peer::verified()->get() as $peer) {
                 PeerSyndicatePost::dispatch(
                     $peer,
