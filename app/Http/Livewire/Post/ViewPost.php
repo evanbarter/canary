@@ -17,9 +17,9 @@ class ViewPost extends Component
     /** @var array */
     protected $listeners = ['postViewOpen' => 'open', 'postViewClose' => 'close'];
 
-    public function open($id)
+    public function open(string $slug)
     {
-        $this->post = Post::where('slug', $id)->firstOrFail();
+        $this->post = Post::where('slug', $slug)->firstOrFail();
         if ($this->post->postable_type === 'text') {
             $this->emit('hideList');
         }
