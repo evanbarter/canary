@@ -64,5 +64,9 @@ class PeerSyndicateComment implements ShouldQueue
             'comment' =>  $comment,
             'event' => $this->event,
         ]);
+
+        if ($response->status() !== 200) {
+            $response->throw(sprintf('Could not syndicate comment to peer: %s', $this->peer->url));
+        }
     }
 }
