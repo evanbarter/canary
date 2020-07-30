@@ -13,7 +13,11 @@
         <div class="absolute inset-0 bg-black dark-mode:bg-black opacity-75"></div>
     </div>
     <div class="flex flex-col max-w-full overflow-scroll sm:max-w-7xl z-50">
-        <div x-data="gallery()" x-init="init({{ $post->postable->getMedia('images')->count() }})">
+        <div
+            x-data="gallery()"
+            @keydown.window.arrow-right="navigate('next')"
+            @keydown.window.arrow-left="navigate('prev')"
+            x-init="init({{ $post->postable->getMedia('images')->count() }})">
             <div class="flex">
                 <h1 id="modal-headline" class="flex-1 pl-2 xl:pl-0 mb-4 font-thin italic text-xl sm:text-3xl leading-tight text-white dark-mode:text-gray-400">
                     @foreach ($post->postable->getMedia('images') as $image)
@@ -43,8 +47,8 @@
                         x-transition:leave="opacity-0" --}}
                         class="object-cover mx-auto" src="{{ $image->getUrl() }}">
                     @endforeach
-                    <div class="absolute left-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate(active === 1 ? count : active - 1)"></div>
-                    <div class="absolute right-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate(active === count ? 1 : active + 1)"></div>
+                    <div class="absolute left-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate('prev')"></div>
+                    <div class="absolute right-0 inset-y-0 w-1/3 cursor-pointer" @click="navigate('next')"></div>
                     <div class="absolute bottom-0 inset-x-y w-full flex justify-center pb-2">
                         @foreach ($post->postable->getMedia('images') as $image)
                         <span @click="navigate({{ $loop->index }} + 1)" :class="{ 'bg-white': ({{ $loop->index }} + 1) === active, 'bg-gray-300': ({{ $loop->index }} + 1) !== active }" class="inline-block mx-1 h-2 w-2 rounded cursor-pointer shadow"></span>

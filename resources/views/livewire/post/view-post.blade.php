@@ -22,6 +22,11 @@
                 this.count = count
             },
             navigate(index) {
+                if (index === 'next') {
+                    index = this.active === this.count ? 1 : this.active + 1
+                } else if (index === 'prev') {
+                    index = this.active === 1 ? this.count : this.active - 1
+                }
                 this.active = index
             }
         }
