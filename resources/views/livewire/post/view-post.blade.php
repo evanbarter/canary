@@ -1,4 +1,4 @@
-<div x-data="postView()" @post-close.window ="close">
+<div x-data="postView()" @keydown.window.escape="close" @post-close.window ="close">
     @if ($post)
     @include('components.post.view.' . $post->postable_type, ['post' => $post])
     @endif
