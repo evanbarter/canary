@@ -10,7 +10,7 @@
                 </div>
                 @if (!$images)
                 <div class="mt-3">
-                    <label for="files" class="hidden block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
+                    <label for="files" class="hidden text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Files') }}
                     </label>
                     <input x-ref="images" class="hidden" type="file" wire:model="images" multiple />
