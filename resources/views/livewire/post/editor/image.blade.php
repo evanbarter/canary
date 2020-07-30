@@ -32,11 +32,11 @@
                             <div class="mr-2"><input wire:model="layout" id="layout-gallery" class="form-radio text-indigo-600" type="radio" name="layout" value="gallery" /></div>
                             <div class="flex flex-col w-full">
                                 <span class="font-bold">{{ __('Gallery') }}</span>
-                                <div class="flex justify-center mt-1">
-                                    <div class="w-1/3 h-12 relative">
-                                        <div class="absolute inset-x-0 -ml-8 mb-1 bottom-0 h-10 w-10 bg-gray-100 border border-gray-400 shadow"></div>
-                                        <div class="absolute inset-x-0 bottom-0 h-12 w-12 bg-gray-200 border border-gray-400 shadow z-10"></div>
-                                        <div class="absolute inset-x-0 ml-10 mb-1 bottom-0 h-10 w-10 bg-gray-100 border border-gray-400 shadow"></div>
+                                <div class="flex justify-center mt-4 sm:mt-1">
+                                    <div class="w-1/3 h-6 sm:h-12 relative">
+                                        <div class="absolute inset-x-0 -ml-3 sm:-ml-8 mb-1 bottom-0 h-4 w-4 sm:h-10 sm:w-10 bg-gray-100 border border-gray-400 shadow"></div>
+                                        <div class="absolute inset-x-0 bottom-0 h-6 w-6 sm:h-12 sm:w-12 bg-gray-200 border border-gray-400 shadow z-10"></div>
+                                        <div class="absolute inset-x-0 ml-5 sm:ml-10 mb-1 bottom-0 h-4 w-4 sm:h-10 sm:w-10 bg-gray-100 border border-gray-400 shadow"></div>
                                     </div>
                                 </div>
                             </div>
@@ -45,11 +45,11 @@
                             <div class="mr-2"><input wire:model="layout" id="layout-individual" class="form-radio text-indigo-600" type="radio" name="layout" value="individual" /></div>
                             <div class="flex flex-col w-full">
                                 <span class="font-bold">{{ __('Individual') }}</span>
-                                <div class="flex justify-center mt-1">
-                                    <div class="grid grid-cols-3 gap-1 h-12">
-                                        <div class="w-12 bg-gray-200 border border-gray-400 shadow"></div>
-                                        <div class="w-12 bg-gray-100 border border-gray-400 shadow"></div>
-                                        <div class="w-12 bg-gray-200 border border-gray-400 shadow"></div>
+                                <div class="flex justify-center mt-4 sm:mt-1">
+                                    <div class="grid grid-cols-3 gap-1 h-6 sm:h-12">
+                                        <div class="w-6 sm:w-12 bg-gray-200 border border-gray-400 shadow"></div>
+                                        <div class="w-6 sm:w-12 bg-gray-100 border border-gray-400 shadow"></div>
+                                        <div class="w-6 sm:w-12 bg-gray-200 border border-gray-400 shadow"></div>
                                     </div>
                                 </div>
                             </div>

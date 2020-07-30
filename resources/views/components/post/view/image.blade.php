@@ -64,7 +64,7 @@
                         @elseif (auth()->user())
                         <div class="flex flex-row overflow-y-scroll">
                             @foreach($post->comments as $comment)
-                            <div class="w-1/2 flex-none mr-6">
+                            <div class="w-1/2 flex-none mr-3 md:mr-6">
                                 <x-post.comment :comment="$comment" />
                             </div>
                             @endforeach
