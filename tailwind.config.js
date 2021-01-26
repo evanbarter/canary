@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
     theme: {
@@ -6,12 +7,13 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
-            screens: {
-                // 'dark-mode': { raw: '(prefers-color-scheme: dark)' }
-            },
             opacity: {
                 '85': '0.85',
             },
+            colors: {
+                orange: colors.orange,
+                ...defaultTheme.colors,
+            }
         },
     },
     variants: {
@@ -35,8 +37,8 @@ module.exports = {
         },
     },
     plugins: [
-        require('@tailwindcss/custom-forms'),
-        require('@tailwindcss/ui'),
+        require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
+        require('@tailwindcss/aspect-ratio'),
     ],
 };

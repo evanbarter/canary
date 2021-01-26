@@ -21,12 +21,17 @@
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
-        "tailwindcss": "^1.4",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
         "@ryangjchandler/spruce": "^0.6.0",
-        "@tailwindcss/typography": "^0.1.2",
+        "@tailwindcss/aspect-ratio": "^0.2.0",
+        "@tailwindcss/forms": "^0.2.1",
+        "@tailwindcss/postcss7-compat": "^2.0.2",
+        "@tailwindcss/typography": "^0.1.4",
+        "autoprefixer": "^9.8.6",
+        "postcss": "^7.0.35",
         "trix": "^1.2.3"
     }
 }
