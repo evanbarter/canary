@@ -27,7 +27,7 @@
     <body>
         @yield('body')
 
-        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}" defer></script>
         <livewire:scripts>
         <script src="{{ mix('js/sort.js') }}"></script>
         @stack('scripts')
