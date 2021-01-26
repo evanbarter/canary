@@ -10,16 +10,16 @@
                 </div>
                 <div class="mt-3">
                     <label for="pinned-post" class="text-sm">
-                        <input id="pinned-post" class="form-checkbox text-orange-600" wire:model="pinned" type="checkbox" name="pinned"> {{ __('Pinned') }}
+                        <input id="pinned-post" class="border-gray-300 rounded text-orange-600" wire:model="pinned" type="checkbox" name="pinned"> {{ __('Pinned') }}
                     </label>
-                    <span class="block text-xs">Pinned Posts always appear at the top of your Post list.</span>
+                    <span class="block text-xs">{{ __('Pinned Posts always appear at the top of your Post list.') }}</span>
                 </div>
                 <div class="mt-3">
                     <label for="title" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
                         {{ __('Title') }}
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input wire:model.lazy="title" id="title" name="title" type="text" required autofocus class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('title') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                        <input wire:model.lazy="title" id="title" name="title" type="text" required autofocus class="block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('title') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                     </div>
                     @error('title')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -32,7 +32,7 @@
                     <div class="mt-1 rounded-md shadow-sm">
                         <input x-ref="text" value="{{ $text }}" id="text" name="text" type="hidden" />
                         <div wire:ignore>
-                            <trix-editor id="text-editor" input="text" class="appearance-none block h-64 overflow-scroll resize-y w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('text') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror"></trix-editor>
+                            <trix-editor id="text-editor" input="text" class="block h-64 overflow-scroll resize-y w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('text') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror"></trix-editor>
                         </div>
                         @error('text')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>

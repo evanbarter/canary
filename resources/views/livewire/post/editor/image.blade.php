@@ -61,7 +61,7 @@
                 @if ($layout === 'gallery' || count($images) === 1)
                 <div class="mt-3">
                     <label for="pinned-post" class="text-sm">
-                        <input id="pinned-post" class="form-checkbox text-orange-600" wire:model="pinned" type="checkbox" name="pinned"> {{ __('Pinned') }}
+                        <input id="pinned-post" class="border-gray-300 rounded text-orange-600" wire:model="pinned" type="checkbox" name="pinned"> {{ __('Pinned') }}
                     </label>
                     <span class="block text-xs">Pinned Posts always appear at the top of your Post list.</span>
                 </div>
@@ -83,7 +83,7 @@
                                     {{ __('Title') }}
                                 </label>
                                 <div class="mt-1 rounded-md shadow-sm">
-                                    <input wire:model.lazy="titles.{{ $loop->index }}" id="title-{{ $loop->index }}" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('titles.' . $loop->index) border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                                    <input wire:model.lazy="titles.{{ $loop->index }}" id="title-{{ $loop->index }}" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('titles.' . $loop->index) border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                                 </div>
                                 @error('titles.' . $loop->index)
                                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -94,7 +94,7 @@
                                     {{ __('Description') }}
                                 </label>
                                 <input id="description-{{ $loop->index }}" type="hidden" name="content">
-                                <trix-editor wire:model.debounce="descriptions.{{ $loop->index }}" input="description-{{ $loop->index }}"></trix-editor>
+                                <trix-editor class="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" wire:model.debounce="descriptions.{{ $loop->index }}" input="description-{{ $loop->index }}"></trix-editor>
                             </div>
                             @error('images.' . $loop->index)
                                 <p class="mt-2 text-sm text-red-600">{{ str_replace('images.' . $loop->index, __('Image'), $message) }}</p>
