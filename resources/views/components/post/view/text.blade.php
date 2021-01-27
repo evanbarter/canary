@@ -8,7 +8,7 @@
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 transform scale-100"
     x-transition:leave-end="opacity-0 transform scale-90"
-    class="absolute inset-0 pt-12 flex justify-center {{ auth()->user() ? 'pb-16' : 'mb-12' }}">
+    class="absolute inset-0 flex justify-center {{ auth()->user() ? 'pb-16 pt-12' : 'mb-12 mt-20' }}">
     <div class="flex flex-col w-4/5 sm:max-w-4xl">
         <div class="flex">
             <h1 id="modal-headline" class="flex-1 mb-4 font-extrabold italic text-xl sm:text-5xl leading-tight text-gray-900 dark:text-gray-200">{{ is_array($post->postable->title) ? ($post->postable->title[0] ?? '') : $post->postable->title }}</h1>
