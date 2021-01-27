@@ -1,4 +1,4 @@
-<div class="h-full flex justify-center min-h-screen bg-gray-200 dark-mode:bg-gray-700 shadow-inner p-6 sm:p-24">
+<div class="h-full flex justify-center min-h-screen bg-gray-200 shadow-inner p-6 sm:p-24">
     <div
         x-cloak
         x-data="settings()"
@@ -11,14 +11,14 @@
         x-transition:leave-start="opacity-100 transform"
         x-transition:leave-end="opacity-0 transform"
         class="flex flex-col w-11/12 max-w-6xl h-full">
-        <a class="mb-2 inline-block text-xl text-center transition-colors duration-200 ease-linear hover:bg-black hover:text-white py-2 px-8 rounded-full dark-mode:bg-black dark-mode:hover:bg-gray-200 dark-mode:text-white dark-mode:hover:text-black" href="{{ route('home') }}">
+        <a class="mb-2 inline-block text-xl text-center transition-colors duration-200 ease-linear hover:bg-black hover:text-white py-2 px-8 rounded-full" href="{{ route('home') }}">
             <svg class="h-6 w-6 inline -mt-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
             {{ __('Back') }}
         </a>
-        <div class="bg-white dark-mode:bg-gray-800 rounded-lg shadow-xl">
-            <ul class="bg-gray-100 dark-mode:bg-gray-900 rounded-tl-lg rounded-tr-lg text-gray-600 p-3 mb-6">
-                <li @click="setTab('settings')" class="inline-block px-4 py-3 cursor-pointer mr-3 transition-colors duration-150 ease-linear rounded-lg" :class="{ 'shadow-inner bg-gray-500 hover:bg-gray-600 hover:text-white text-gray-50': tab === 'settings', 'hover:bg-gray-200 hover:text-black dark-mode:text-gray-50 dark-mode:hover:bg-gray-800 dark-mode:hover:text-gray-50': tab !== 'settings' }">{{ __('Settings') }}</li>
-                <li @click="setTab('peers')" class="inline-block px-4 py-3 cursor-pointer mr-3 transition-colors duration-150 ease-linear rounded-lg" :class="{ 'shadow-inner bg-gray-500 hover:bg-gray-600 hover:text-white text-gray-50': tab === 'peers', 'hover:bg-gray-200 hover:text-black dark-mode:text-gray-50 dark-mode:hover:bg-gray-800 dark-mode:hover:text-gray-50': tab !== 'peers' }">{{ __('Peers') }}</li>
+        <div class="bg-white rounded-lg shadow-xl">
+            <ul class="bg-gray-100 rounded-tl-lg rounded-tr-lg text-gray-600 p-3 mb-6">
+                <li @click="setTab('settings')" class="inline-block px-4 py-3 cursor-pointer mr-3 transition-colors duration-150 ease-linear rounded-lg" :class="{ 'shadow-inner bg-gray-500 hover:bg-gray-600 hover:text-white text-gray-50': tab === 'settings', 'hover:bg-gray-200 hover:text-black ': tab !== 'settings' }">{{ __('Settings') }}</li>
+                <li @click="setTab('peers')" class="inline-block px-4 py-3 cursor-pointer mr-3 transition-colors duration-150 ease-linear rounded-lg" :class="{ 'shadow-inner bg-gray-500 hover:bg-gray-600 hover:text-white text-gray-50': tab === 'peers', 'hover:bg-gray-200 hover:text-black ': tab !== 'peers' }">{{ __('Peers') }}</li>
             </ul>
             @if (session()->has('success'))
             <div
@@ -41,7 +41,7 @@
                     </div>
                     <div class="sm:w-3/4">
                         <div>
-                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">{{ __('Your current password') }}</label>
+                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Your current password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
                                 <input wire:model.lazy="passwordCurrent" id="passwordCurrent" name="passwordCurrent" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('passwordCurrent') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
@@ -50,13 +50,13 @@
                             @enderror
                         </div>
                         <div class="mt-3">
-                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">{{ __('Enter new password') }}</label>
+                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Enter new password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
                                 <input wire:model.lazy="password" id="password" name="password" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('password') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
                         </div>
                         <div class="mt-3">
-                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">{{ __('Confirm new password') }}</label>
+                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Confirm new password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
                                 <input wire:model.lazy="passwordConfirmation" id="passwordConfirmation" name="passwordConfirmation" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('passwordConfirmation') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-800 mb-6">
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse mb-6">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                         <button wire:click.prevent="updatePassword" type="button" class="inline-flex justify-center w-full rounded-md border border-red-400 px-4 py-2 bg-gradient-brand text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             {{ __('Update Password') }}
@@ -82,7 +82,7 @@
                     </div>
                     <div class="sm:w-3/4">
                         <div>
-                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">{{ __('Peer website URL') }}</label>
+                            <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Peer website URL') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
                                 <input wire:model.lazy="peerAddURL" id="peerAddURL" name="peerAddURL" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('peerAddURL') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark-mode:bg-gray-700 border-b border-gray-200 mb-6">
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-b border-gray-200 mb-6">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                         <button wire:click.prevent="addPeer" type="button" class="inline-flex justify-center w-full rounded-md border border-red-400 px-4 py-2 bg-gradient-brand text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             {{ __('Add Peer') }}
@@ -122,7 +122,7 @@
                                         <tbody class="bg-white">
                                             @forelse ($peers as $peer)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                                                     <div class="flex items-center">
                                                         <div>
                                                             @if ($peer->name)
@@ -132,7 +132,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                                                     @if ($peer->verified_at)
                                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                         {{ __('Active') }}
@@ -143,7 +143,7 @@
                                                     </span>
                                                     @endif
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+                                                <td class="px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                                     <div class="flex justify-end space-x-8">
                                                     @if ($peer->token && !$peer->verified_at)
                                                     <a href="{{ route('peers.confirm', $peer) }}" class="text-indigo-600 hover:text-indigo-900">Confirm</a>
@@ -154,7 +154,7 @@
                                             </tr>
                                             @empty
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-no-wrap text-left border-b border-gray-200 text-sm leading-5 font-medium" colspan="3">
+                                                <td class="px-6 py-4 whitespace-nowrap text-left border-b border-gray-200 text-sm leading-5 font-medium" colspan="3">
                                                     {{ __('You have not added any peers yet.') }}
                                                 </td>
                                             </tr>

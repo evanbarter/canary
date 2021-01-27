@@ -10,7 +10,7 @@
     x-transition:leave-end="opacity-0 transform"
     class="fixed z-40 inset-0 flex py-4 xl:py-16 xl:pt-8 justify-center">
     <div @click="show = false; setTimeout(() => {  $dispatch('post-close') }, 200)" class="fixed inset-0">
-        <div class="absolute inset-0 bg-black dark-mode:bg-black opacity-75"></div>
+        <div class="absolute inset-0 bg-black opacity-75"></div>
     </div>
     <div class="flex flex-col max-w-full overflow-scroll sm:max-w-7xl z-50">
         <div
@@ -19,12 +19,12 @@
             @keydown.window.arrow-left="navigate('prev')"
             x-init="init({{ $post->postable->getMedia('images')->count() }})">
             <div class="flex">
-                <h1 id="modal-headline" class="flex-1 pl-2 xl:pl-0 mb-4 font-thin italic text-xl sm:text-3xl leading-tight text-white dark-mode:text-gray-400">
+                <h1 id="modal-headline" class="flex-1 pl-2 xl:pl-0 mb-4 font-extralight italic text-xl sm:text-3xl leading-tight text-white">
                     @foreach ($post->postable->getMedia('images') as $image)
                     <span x-show="({{ $loop->index }} + 1) === active">{{ $post->postable->title[$loop->index] ?? ''}}</span>
                     @endforeach
                 </h1>
-                <div class="flex items-end ml-3 mb-3 text-gray-100 dark-mode:text-gray-200">
+                <div class="flex items-end ml-3 mb-3 text-gray-100">
                     @can('update', $post)
                     <span @click="window.livewire.emit('postEditorImageEdit', {{ $post->id }}); $store.postModal.open = 'image'">
                         <svg class="h-8 w-8 cursor-pointer hover:text-red-400 transition-colors duration-150 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>

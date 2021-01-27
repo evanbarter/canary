@@ -57,6 +57,10 @@
     }
 }
 
+trix-toolbar .trix-button {
+    @apply dark:bg-white;
+}
+
 .bg-gradient-alt {
     background: linear-gradient(135deg, rgba(85,60,154,1) 0%, rgba(90,103,216,1) 90%);
 }

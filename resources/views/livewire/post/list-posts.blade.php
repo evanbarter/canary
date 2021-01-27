@@ -13,7 +13,7 @@
         @include('components.post.list.' . $post->postable_type, ['post' => $post])
         @endforeach
         <div class="col-span-1 sm:col-span-3">
-            <hr class="shadow-lg dark-mode:border-gray-800">
+            <hr class="border-gray-300">
         </div>
         @endif
         @foreach($posts as $post)

@@ -1,4 +1,4 @@
-<label for="visibility" class="block text-sm font-medium text-gray-700 leading-5 dark-mode:text-white">
+<label for="visibility" class="block text-sm font-medium text-gray-700 leading-5">
     {{ __('Visibility') }}
 </label>
 <div id="visibility-{{ \Str::slug($type) }}" x-data="{ selected: {{ $visibility }} }" class="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">

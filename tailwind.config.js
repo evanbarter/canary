@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
 
 module.exports = {
+    darkMode: "class",
     theme: {
         extend: {
             fontFamily: {
@@ -11,13 +12,20 @@ module.exports = {
                 '85': '0.85',
             },
             colors: {
+                transparent: 'transparent',
+                current: 'currentColor',
+                black: colors.black,
+                white: colors.white,
+                gray: colors.trueGray,
+                indigo: colors.indigo,
                 orange: colors.orange,
-                ...defaultTheme.colors,
+                blue: defaultTheme.colors.blue,
+                green: defaultTheme.colors.green,
             }
         },
     },
     variants: {
-        backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+        // backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     },
     purge: {
         content: [
@@ -40,5 +48,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
+        require("nightwind"),
     ],
 };
