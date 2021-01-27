@@ -29,7 +29,7 @@ class Settings extends Component
     public $peerAddURL = '';
 
     protected $listeners = ['settingsSetProperty' => 'setProperty'];
-    protected $updatesQueryString = ['tab'];
+    protected $queryString = ['tab'];
 
     public function mount()
     {
