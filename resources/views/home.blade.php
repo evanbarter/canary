@@ -3,11 +3,11 @@
 @section('content')
     @if (!auth()->user())
     <div class="flex p-2 bg-white justify-end">
-    <span class="text-xs sm:text-sm" x-data="{ selected: document.documentElement.classList.contains('dark') ? 'dark' : 'light' }">
-        <div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer" x-on:click="selected = selected === 'dark' ? 'light' : 'dark'; nightwind.toggle();">
-            <span x-text="selected === 'dark' ? '☀️' : '🌒'"></span> {{ __('Toggle') }}
-        </div>
-    </span>
+        <span class="text-xs sm:text-sm" x-data="{ selected: document.documentElement.classList.contains('dark') ? 'dark' : 'light' }">
+            <div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer" x-on:click="selected = selected === 'dark' ? 'light' : 'dark'; nightwind.toggle();">
+                <span x-text="selected === 'dark' ? '☀️' : '🌒'"></span> {{ __('Toggle') }}
+            </div>
+        </span>
     </div>
     @endif
 
@@ -16,7 +16,7 @@
         <x-post.modal type="text" />
     </div>
 
-    <div class="h-full min-h-screen bg-gray-200 dark:bg-gray-900 shadow-inner @if (auth()->user()) pb-16 @endif">
+    <div class="h-full min-h-screen shadow-inner @if (auth()->user()) pb-16 @endif">
         @livewire('post.view-post')
         @livewire('post.list-posts')
     </div>
