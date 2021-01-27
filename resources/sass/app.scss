@@ -77,6 +77,14 @@ trix-toolbar .trix-button {
     background-image: linear-gradient(135deg, #F56565, #F56565 30%, #ED8936);
 }
 
+.prose strong {
+    @apply dark:text-gray-300;
+}
+
+.prose h1 {
+    @apply dark:text-gray-300;
+}
+
 .prose em {
     @apply px-1 bg-indigo-200 rounded;
 }

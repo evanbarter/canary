@@ -43,7 +43,7 @@
                         <div>
                             <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Your current password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input wire:model.lazy="passwordCurrent" id="passwordCurrent" name="passwordCurrent" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('passwordCurrent') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                                <input wire:model.lazy="passwordCurrent" id="passwordCurrent" name="passwordCurrent" type="password" required class="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('passwordCurrent') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
                             @error('passwordCurrent')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -52,13 +52,13 @@
                         <div class="mt-3">
                             <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Enter new password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input wire:model.lazy="password" id="password" name="password" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('password') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                                <input wire:model.lazy="password" id="password" name="password" type="password" required class="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('password') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
                         </div>
                         <div class="mt-3">
                             <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Confirm new password') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input wire:model.lazy="passwordConfirmation" id="passwordConfirmation" name="passwordConfirmation" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('passwordConfirmation') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                                <input wire:model.lazy="passwordConfirmation" id="passwordConfirmation" name="passwordConfirmation" type="password" required class="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('passwordConfirmation') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
                             @error('password')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -84,7 +84,7 @@
                         <div>
                             <label for="text" class="block text-sm font-medium text-gray-700 leading-5">{{ __('Peer website URL') }}</label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input wire:model.lazy="peerAddURL" id="peerAddURL" name="peerAddURL" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('peerAddURL') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                                <input wire:model.lazy="peerAddURL" id="peerAddURL" name="peerAddURL" type="text" required class="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('peerAddURL') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
                             </div>
                             @error('peerAddURL')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>

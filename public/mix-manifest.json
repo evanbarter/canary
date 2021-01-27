@@ -1,9 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=41b2711bcf2377bb32ae",
-    "/css/app.css": "/css/app.css?id=99a311386e29a0852e33",
-    "/js/app.js.map": "/js/app.js.map?id=4e1108941f94de9d7189",
-    "/js/night.js": "/js/night.js?id=169b7d2611a30b891068",
-    "/js/night.js.map": "/js/night.js.map?id=ba05d3b9a08303c49d98",
-    "/js/sort.js": "/js/sort.js?id=7f42cbe1e631be475e62",
-    "/js/sort.js.map": "/js/sort.js.map?id=88ecb87cde56e5b0c67a"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/night.js": "/js/night.js",
+    "/js/sort.js": "/js/sort.js"
 }
