@@ -1,5 +1,5 @@
 @if ($comment)
-<div class="p-4 mb-3 text-sm sm:text-base relative bg-white shadow-lg rounded-lg">
+<div class="p-4 mb-3 text-sm relative bg-white dark:bg-gray-700 shadow-lg rounded-lg">
     {!! $comment->comment !!}
     <div class="flex flex-row-reverse mt-5">
         @if ($comment->syndicated)
